@@ -1,8 +1,6 @@
 # Use official node image
 FROM node:18-alpine AS build
 
-ENV PORT=4002
-
 WORKDIR /app
 
 COPY package*.json ./
