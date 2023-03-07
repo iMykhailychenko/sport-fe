@@ -7,6 +7,7 @@ interface Props {
     trainingId: ID;
 }
 export const Iterations = memo(({ exerciseId, trainingId }: Props): JSX.Element => {
+    console.log(exerciseId, trainingId);
     return <></>;
 });
 
