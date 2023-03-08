@@ -1,19 +1,23 @@
-import { Button, Center } from '@chakra-ui/react';
-import { FiChevronRight } from 'react-icons/all';
+import { Button } from '@chakra-ui/react';
+import { RiListCheck2 } from 'react-icons/all';
 import { Link } from 'react-router-dom';
 
 import { DateNav } from '../../components/date-nav';
+import { TodayTraining } from '../../components/today-training';
+import { useDateQuery } from '../../query/dates/dates.hook';
 
 const TrainingsPage = (): JSX.Element => {
+    const { data, isLoading } = useDateQuery();
+
     return (
         <>
-            <DateNav />
-
-            <Center>
-                <Button as={Link} to="/trainings/all" rightIcon={<FiChevronRight />}>
-                    Дивитись всі тренування
+            <DateNav>
+                <Button as={Link} to="/trainings/all" variant="outline" rightIcon={<RiListCheck2 />}>
+                    Всі тренування
                 </Button>
-            </Center>
+            </DateNav>
+
+            <TodayTraining data={data} isLoading={isLoading} />
         </>
     );
 };

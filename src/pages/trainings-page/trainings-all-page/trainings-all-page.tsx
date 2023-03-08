@@ -11,7 +11,6 @@ import {
     Text,
     Button,
     Center,
-    Flex,
 } from '@chakra-ui/react';
 import { range } from 'lodash-es';
 import { CgMathPlus } from 'react-icons/all';
@@ -38,11 +37,11 @@ const TrainingsAllPage = (): JSX.Element => {
 
     return (
         <>
-            <Flex justifyContent="flex-end" mb={6}>
+            <Center mb={6}>
                 <Button as={Link} to="/new/trainings" leftIcon={<CgMathPlus />}>
                     Додати нове тренування
                 </Button>
-            </Flex>
+            </Center>
 
             {data?.length ? (
                 <Accordion allowToggle>

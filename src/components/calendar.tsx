@@ -1,11 +1,12 @@
 import React, { ChangeEvent, useCallback, useMemo } from 'react';
 
-import { Button, Grid, Text, Select, HStack } from '@chakra-ui/react';
+import { Button, Grid, Text, Select } from '@chakra-ui/react';
 import { range } from 'lodash-es';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/all';
 
 import { useDate } from '../context/date.context';
 import { allYears, monthList, weekList } from '../utils/calendar';
+
+import { DateNav } from './date-nav';
 
 export const Calendar = (): JSX.Element => {
     const { day, month, year, setDay, setMonth, setYear, onReset, totalDays } = useDate();
@@ -13,29 +14,12 @@ export const Calendar = (): JSX.Element => {
     const onChangeYear = useCallback((event: ChangeEvent<HTMLSelectElement>) => setYear(Number(event.target.value)), []);
     const onChangeMonth = useCallback((event: ChangeEvent<HTMLSelectElement>) => setMonth(Number(event.target.value)), []);
 
-    const onBack = useCallback(() => {
-        setMonth(prev => {
-            if (prev <= 0) return 11;
-            return prev - 1;
-        });
-    }, []);
-
-    const onNext = useCallback(() => {
-        setMonth(prev => {
-            if (prev >= 11) return 0;
-            return prev + 1;
-        });
-    }, []);
-
     const currentMonthArray = useMemo(() => range(1, totalDays + 1), [totalDays]);
     const prevMonthArray = useMemo(() => range(new Date(year, month, 0).getDay()), [year, month, totalDays]);
 
     return (
         <>
-            <HStack justifyContent="space-between" alignItems="center" mb={4}>
-                <Button onClick={onBack}>
-                    <FiChevronLeft />
-                </Button>
+            <DateNav>
                 <Select placeholder="Select year" value={year} onChange={onChangeYear} w="33%">
                     {allYears.map(y => (
                         <option key={y} value={y}>
@@ -51,10 +35,7 @@ export const Calendar = (): JSX.Element => {
                         </option>
                     ))}
                 </Select>
-                <Button onClick={onNext}>
-                    <FiChevronRight />
-                </Button>
-            </HStack>
+            </DateNav>
 
             <Button w="100%" mb={4} onClick={onReset}>
                 Повернутись до поточної дати

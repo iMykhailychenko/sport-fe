@@ -18,7 +18,7 @@ export const Header = (): JSX.Element => {
     const toggleMode = useCallback(() => setColorMode(isDark ? 'light' : 'dark'), [isDark]);
 
     const dayWithZero = String(day).padStart(2, '0');
-    const monthWithZero = String(month).padStart(2, '0');
+    const monthWithZero = String(month + 1).padStart(2, '0');
 
     const backLink = useMemo(() => {
         const arr = pathname.split('/');

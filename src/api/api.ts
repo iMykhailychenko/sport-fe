@@ -5,11 +5,13 @@ import { LogInResponse } from '../query/auth/auth.type';
 const AUTH_KEY = 'jwt-auth-key';
 
 export const publicApi = axios.create({
-    baseURL: 'http://70.34.201.18:3001',
+    // baseURL: 'http://70.34.201.18:3001',
+    baseURL: 'http://0.0.0.0:3001',
 });
 
 export const privateApi = axios.create({
-    baseURL: 'http://70.34.201.18:3001',
+    // baseURL: 'http://70.34.201.18:3001',
+    baseURL: 'http://0.0.0.0:3001',
 });
 
 export const setToken = (data: LogInResponse): void => {

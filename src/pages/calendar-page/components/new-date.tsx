@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { Button, Flex, Select, Skeleton, Heading } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
+import { CgMathPlus } from 'react-icons/all';
 
 import { useDate } from '../../../context/date.context';
 import { useDatesMutation } from '../../../query/dates/dates.hook';
@@ -46,7 +47,7 @@ export const NewDate = (): JSX.Element => {
             justifyContent="center"
             onSubmit={handleSubmit}
         >
-            <Heading mt={4} textAlign="center">
+            <Heading mt={4} textAlign="center" size="sm">
                 У вас немає тренувань на цей день
             </Heading>
 
@@ -62,7 +63,7 @@ export const NewDate = (): JSX.Element => {
                 </Select>
             )}
 
-            <Button type="submit" disabled={!training} opacity={training ? 1 : 0.5}>
+            <Button type="submit" colorScheme="blue" disabled={!training} opacity={training ? 1 : 0.5} leftIcon={<CgMathPlus />}>
                 Додати тренування в цей день
             </Button>
         </Flex>
