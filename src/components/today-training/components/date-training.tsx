@@ -21,10 +21,11 @@ import { Iterations } from './iterations';
 const myRange = range(6);
 
 interface Props {
-    trainingId: ID;
+    date_id: ID;
+    training_id: ID;
 }
-export const DateTraining = memo(({ trainingId }: Props): JSX.Element => {
-    const { data, isLoading } = useTrainingExercisesQuery(trainingId);
+export const DateTraining = memo(({ date_id, training_id }: Props): JSX.Element => {
+    const { data, isLoading } = useTrainingExercisesQuery(training_id);
 
     if (isLoading) {
         return (
@@ -51,7 +52,7 @@ export const DateTraining = memo(({ trainingId }: Props): JSX.Element => {
                                 </AccordionButton>
                             </Heading>
                             <AccordionPanel pb={4}>
-                                {isExpanded && <Iterations exerciseId={item.id} trainingId={trainingId} />}
+                                {isExpanded && <Iterations date_id={date_id} exercise_id={item.id} />}
                             </AccordionPanel>
                         </>
                     )}

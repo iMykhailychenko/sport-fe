@@ -9,7 +9,7 @@ import { allYears, monthList, weekList } from '../utils/calendar';
 import { DateNav } from './date-nav';
 
 export const Calendar = (): JSX.Element => {
-    const { day, month, year, setDay, setMonth, setYear, onReset, totalDays } = useDate();
+    const { day, month, year, setDay, setMonth, setYear, totalDays } = useDate();
 
     const onChangeYear = useCallback((event: ChangeEvent<HTMLSelectElement>) => setYear(Number(event.target.value)), []);
     const onChangeMonth = useCallback((event: ChangeEvent<HTMLSelectElement>) => setMonth(Number(event.target.value)), []);
@@ -36,10 +36,6 @@ export const Calendar = (): JSX.Element => {
                     ))}
                 </Select>
             </DateNav>
-
-            <Button w="100%" mb={4} onClick={onReset}>
-                Повернутись до поточної дати
-            </Button>
 
             <Grid templateColumns="repeat(7, 1fr)" gap={1}>
                 {weekList.map(d => (

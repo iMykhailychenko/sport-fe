@@ -2,13 +2,13 @@ import { ID } from '../../types/api';
 
 export interface DateBody {
     value: string;
-    trainingId: ID;
+    training_id: ID;
     comment?: string;
 }
 
 export interface DateType {
     id: ID;
     value: string;
-    trainingId: ID;
+    training_id: ID;
     comment?: string;
 }

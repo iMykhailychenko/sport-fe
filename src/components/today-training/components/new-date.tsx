@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
-import { Button, Flex, Select, Skeleton, Heading } from '@chakra-ui/react';
+import { IconButton, Flex, Select, Skeleton, Heading } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { CgMathPlus } from 'react-icons/all';
 
@@ -26,7 +26,7 @@ export const NewDate = (): JSX.Element => {
     const handleSubmit = (event: FormEvent): void => {
         event.preventDefault();
         if (training) {
-            const body: DateBody = { value: param, trainingId: training };
+            const body: DateBody = { value: param, training_id: training };
             mutate(body, {
                 onSuccess: () => {
                     queryClient.resetQueries(['dates', param]);
@@ -47,25 +47,35 @@ export const NewDate = (): JSX.Element => {
             justifyContent="center"
             onSubmit={handleSubmit}
         >
-            <Heading mt={4} textAlign="center" size="sm">
+            <Heading mt={10} textAlign="center" size="sm">
                 У вас немає тренувань на цей день
             </Heading>
 
-            {isLoading ? (
-                <Skeleton h="45px" w="100%" my={5} />
-            ) : (
-                <Select placeholder="Оберіть тренування зі списку" size="lg" my={5} value={training} onChange={handleChange}>
-                    {data?.map(item => (
-                        <option key={item.id} value={item.id}>
-                            {item.title}
-                        </option>
-                    ))}
-                </Select>
-            )}
+            <Flex my={5}>
+                {isLoading ? (
+                    <Skeleton h="45px" w="100%" />
+                ) : (
+                    <Select placeholder="Оберіть тренування" size="lg" value={training} onChange={handleChange}>
+                        {data?.map(item => (
+                            <option key={item.id} value={item.id}>
+                                {item.title}
+                            </option>
+                        ))}
+                    </Select>
+                )}
 
-            <Button type="submit" colorScheme="blue" disabled={!training} opacity={training ? 1 : 0.5} leftIcon={<CgMathPlus />}>
-                Додати тренування в цей день
-            </Button>
+                <IconButton
+                    ml={2}
+                    size="lg"
+                    type="submit"
+                    colorScheme="blue"
+                    disabled={!training}
+                    opacity={training ? 1 : 0.5}
+                    aria-label="Додати тренування в цей день"
+                >
+                    <CgMathPlus />
+                </IconButton>
+            </Flex>
         </Flex>
     );
 };
