@@ -8,7 +8,7 @@ import { EditIterationForm } from './edit-iteration-form';
 
 interface Props {
     iteration: Iteration;
-    refetch: () => void;
+    refetch: () => Promise<unknown>;
 }
 export const IterationsOptions = ({ iteration, refetch }: Props): JSX.Element => {
     const { isOpen, onOpen, onClose } = useDisclosure();

@@ -22,7 +22,7 @@ import { IterationForm } from './type';
 interface Props {
     onClose: () => void;
     iteration: Iteration;
-    refetch: () => Promise<void>;
+    refetch: () => Promise<unknown>;
 }
 export const EditIterationForm = ({ onClose, iteration, refetch }: Props): JSX.Element => {
     const id = `edit-iteration-${iteration.id}`;
