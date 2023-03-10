@@ -28,6 +28,7 @@ const EditExercise = (): JSX.Element => {
     const onSubmit = async (data: ExercisesBody): Promise<void> => {
         try {
             await updateExercisesMutation({ ...data, id: exerciseId } as ExercisesType);
+            await navigate('/exercises');
         } catch (err) {
             console.log(err);
         }
