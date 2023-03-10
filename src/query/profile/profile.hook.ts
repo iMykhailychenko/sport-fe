@@ -8,9 +8,9 @@ import { ProfileType } from './profile.type';
 export const useProfileQuery = (): UseQueryResult<ProfileType> => {
     const isTokenPresent = refreshToken();
 
-    const data = useQuery({
+    const data = useQuery<ProfileType>({
         queryKey: ['profile'],
-        queryFn: profileFetcher,
+        queryFn: profileFetcher.get,
         onError: removeToken,
         retry: false,
         staleTime: 5_000,

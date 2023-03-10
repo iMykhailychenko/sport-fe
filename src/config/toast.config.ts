@@ -7,3 +7,11 @@ export const errorToast: UseToastOptions = {
     duration: 5_000,
     isClosable: true,
 };
+
+export const successToast: UseToastOptions = {
+    title: 'Ураа',
+    description: 'Успіх',
+    status: 'success',
+    duration: 5_000,
+    isClosable: true,
+};

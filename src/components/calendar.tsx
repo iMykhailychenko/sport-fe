@@ -6,7 +6,7 @@ import { range } from 'lodash-es';
 import { useDate } from '../context/date.context';
 import { allYears, monthList, weekList } from '../utils/calendar';
 
-import { DateNav } from './date-nav';
+import { DateNavigation } from './date-navigation';
 
 export const Calendar = (): JSX.Element => {
     const { day, month, year, setDay, setMonth, setYear, totalDays } = useDate();
@@ -19,7 +19,7 @@ export const Calendar = (): JSX.Element => {
 
     return (
         <>
-            <DateNav>
+            <DateNavigation>
                 <Select placeholder="Select year" value={year} onChange={onChangeYear} w="33%">
                     {allYears.map(y => (
                         <option key={y} value={y}>
@@ -35,7 +35,7 @@ export const Calendar = (): JSX.Element => {
                         </option>
                     ))}
                 </Select>
-            </DateNav>
+            </DateNavigation>
 
             <Grid templateColumns="repeat(7, 1fr)" gap={1}>
                 {weekList.map(d => (

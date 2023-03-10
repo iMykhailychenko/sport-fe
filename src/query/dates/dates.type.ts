@@ -1,14 +1,20 @@
 import { ID } from '../../types/api';
+import { ExercisesType } from '../exercises/exercises.type';
 
-export interface DateBody {
-    value: string;
-    training_id: ID;
+export interface DateType extends ExercisesType {
+    date: string;
+    exercise_id: number;
     comment?: string;
 }
 
-export interface DateType {
-    id: ID;
-    value: string;
+export interface DateExerciseBody {
+    date: string;
+    exercise_id: ID;
+    comment?: string;
+}
+
+export interface DateTrainingBody {
+    date: string;
     training_id: ID;
     comment?: string;
 }

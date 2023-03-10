@@ -16,3 +16,10 @@ export interface Iteration {
     date_id: ID;
     exercise_id: ID;
 }
+
+export interface UpdateIterationBody {
+    id: number;
+    time?: number;
+    weight?: number;
+    repeat?: number;
+}

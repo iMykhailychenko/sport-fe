@@ -5,6 +5,12 @@ export interface TrainingsType {
     title: string;
 }
 
+export interface UpdateTrainingsType {
+    id: ID;
+    title: string;
+    exercises: ID[];
+}
+
 export interface TrainingsBody {
     title: string;
     exercises: ID[];

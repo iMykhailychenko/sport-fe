@@ -3,28 +3,37 @@ import { UseMutationResult } from '@tanstack/react-query/src/types';
 
 import { ID } from '../../types/api';
 
-import { createExercisesFetcher, exercisesFetcher, trainingExercisesFetcher } from './exercises.fetcher';
+import { trainingFetcher } from './exercises.fetcher';
 import { ExercisesBody, ExercisesType } from './exercises.type';
 
-export const useExercisesQuery = (): UseQueryResult<ExercisesType[]> => {
-    return useQuery({
+export const useAllExercisesQuery = (): UseQueryResult<ExercisesType[]> => {
+    return useQuery<ExercisesType[]>({
         queryKey: ['exercises'],
-        queryFn: exercisesFetcher,
+        queryFn: trainingFetcher.getAll,
+        refetchOnWindowFocus: false,
+        staleTime: 1_000,
+    });
+};
+
+export const useExerciseQuery = (id?: ID): UseQueryResult<ExercisesType> => {
+    return useQuery<ExercisesType>({
+        queryKey: ['exercises', id],
+        queryFn: () => trainingFetcher.get(id),
         refetchOnWindowFocus: false,
         staleTime: 30_000,
-    });
-};
-
-export const useExercisesMutation = (): UseMutationResult<void, unknown, ExercisesBody> => {
-    return useMutation({ mutationKey: ['exercises', 'new'], mutationFn: createExercisesFetcher });
-};
-
-export const useTrainingExercisesQuery = (id: ID): UseQueryResult<ExercisesType[]> => {
-    return useQuery({
-        queryKey: ['trainings', String(id)],
-        queryFn: () => trainingExercisesFetcher(id),
+        enabled: Boolean(id),
         retry: false,
-        refetchOnWindowFocus: false,
-        keepPreviousData: true,
     });
+};
+
+export const useCreateExercisesMutation = (): UseMutationResult<void, unknown, ExercisesBody> => {
+    return useMutation({ mutationKey: ['exercises', 'new'], mutationFn: trainingFetcher.create });
+};
+
+export const useUpdateExercisesMutation = (): UseMutationResult<void, unknown, ExercisesType> => {
+    return useMutation({ mutationKey: ['exercises', 'new'], mutationFn: trainingFetcher.update });
+};
+
+export const useDeleteExercisesMutation = (): UseMutationResult<void, unknown, ID> => {
+    return useMutation({ mutationKey: ['exercises', 'new'], mutationFn: trainingFetcher.delete });
 };

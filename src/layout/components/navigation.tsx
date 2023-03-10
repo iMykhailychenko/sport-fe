@@ -3,7 +3,7 @@ import React from 'react';
 import { Grid, useColorMode } from '@chakra-ui/react';
 import { FcHome, FcSportsMode, FcCalendar, FcPlus } from 'react-icons/all';
 
-import { NavLink } from '../../components/nav-link';
+import { NavigationLink } from './navigation-link';
 
 export const Navigation = (): JSX.Element => {
     const { colorMode } = useColorMode();
@@ -22,21 +22,21 @@ export const Navigation = (): JSX.Element => {
             borderColor={borderColor}
             templateColumns="repeat(4, 1fr)"
         >
-            <NavLink to="/" borderRight="1px" borderColor={borderColor}>
+            <NavigationLink to="/" borderRight="1px" borderColor={borderColor}>
                 <FcHome />
-            </NavLink>
+            </NavigationLink>
 
-            <NavLink to="/trainings" borderRight="1px" borderColor={borderColor}>
+            <NavigationLink to="/trainings/today" borderRight="1px" borderColor={borderColor}>
                 <FcSportsMode />
-            </NavLink>
+            </NavigationLink>
 
-            <NavLink to="/calendar" borderRight="1px" borderColor={borderColor}>
+            <NavigationLink to="/calendar" borderRight="1px" borderColor={borderColor}>
                 <FcCalendar />
-            </NavLink>
+            </NavigationLink>
 
-            <NavLink to="/new">
+            <NavigationLink to="/new">
                 <FcPlus />
-            </NavLink>
+            </NavigationLink>
         </Grid>
     );
 };
