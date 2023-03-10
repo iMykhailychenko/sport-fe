@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { Heading, Flex, IconButton } from '@chakra-ui/react';
-import { HiOutlinePlusSm, BiEdit } from 'react-icons/all';
+import { Heading, Flex, IconButton, Text, InputLeftElement, Input, InputGroup } from '@chakra-ui/react';
+import { HiOutlinePlusSm, BiEdit, RiSearchLine } from 'react-icons/all';
 import { Link } from 'react-router-dom';
 
 import { Table, Td } from '../../components/table';
+import { useFuseInput } from '../../hooks/fuse.hook';
 import { useAllExercisesQuery } from '../../query/exercises/exercises.hook';
 import { ExercisesType } from '../../query/exercises/exercises.type';
 
@@ -12,6 +13,7 @@ const header = ['Назва', ''];
 
 const Exercises = (): JSX.Element => {
     const { data, isLoading } = useAllExercisesQuery();
+    const { search, list, onChange } = useFuseInput(data, ['title']);
 
     return (
         <>
@@ -23,10 +25,21 @@ const Exercises = (): JSX.Element => {
                 </IconButton>
             </Flex>
 
-            <Table<ExercisesType> header={header} isLoading={isLoading} data={data ?? []}>
+            <InputGroup>
+                <InputLeftElement pointerEvents="none">
+                    <RiSearchLine />
+                </InputLeftElement>
+                <Input type="search" value={search} onChange={onChange} placeholder="Шукати" />
+            </InputGroup>
+
+            <Table<ExercisesType> header={header} isLoading={isLoading} data={list}>
                 {item => (
                     <>
-                        <Td w="100%">{item.title}</Td>
+                        <Td w="100%">
+                            <Text noOfLines={1} display="block" maxWidth="73vw">
+                                {item.title}
+                            </Text>
+                        </Td>
                         <Td>
                             <IconButton as={Link} aria-label="Редагувати вправу" to={`/exercises/${item.id}`}>
                                 <BiEdit />

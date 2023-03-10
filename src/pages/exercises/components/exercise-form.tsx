@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React from 'react';
 
 import {
     Button,
@@ -11,14 +11,15 @@ import {
     Stack,
     Textarea,
     Heading,
+    Text,
     useDisclosure,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import Fuse from 'fuse.js';
 import { useForm } from 'react-hook-form';
 import { object, string } from 'yup';
 
 import { Table, Td } from '../../../components/table';
+import { useFuse } from '../../../hooks/fuse.hook';
 import { useAllExercisesQuery } from '../../../query/exercises/exercises.hook';
 import { ExercisesBody, ExercisesType } from '../../../query/exercises/exercises.type';
 
@@ -45,26 +46,9 @@ export const ExerciseForm = ({ onSubmit, defaultValues, buttonLabel }: Props): J
     } = useForm<ExercisesBody>({ defaultValues, resolver: yupResolver(ExerciseSchema) });
 
     const { data, refetch, isLoading } = useAllExercisesQuery();
-    const fuse = useRef<Fuse<ExercisesType> | null>(null);
-    const [searchResult, setSearchResult] = useState<Fuse.FuseResult<ExercisesType>[]>([]);
-
-    useEffect(() => {
-        if (data) {
-            fuse.current = new Fuse(data, { keys: ['title'] });
-        }
-    }, [data]);
 
     const title = watch('title') || '';
-    useEffect(() => {
-        if (fuse.current) {
-            setSearchResult(fuse.current.search(title));
-        }
-    }, [title]);
-
-    const list = useMemo(
-        () => (searchResult?.length ? searchResult.map(element => element.item) : data || []),
-        [searchResult, data],
-    );
+    const list = useFuse(data, title, ['title']);
 
     const innerSubmit = (data: ExercisesBody): void => {
         onSubmit(data).then(() => {
@@ -110,10 +94,16 @@ export const ExerciseForm = ({ onSubmit, defaultValues, buttonLabel }: Props): J
             </form>
 
             <Heading mb={4} mt={10} size="md">
-                {searchResult?.length ? 'Схожі вправи' : 'Всі вправи'}
+                Схожі вправи
             </Heading>
             <Table<ExercisesType> header={['Назва']} data={list} isLoading={isLoading}>
-                {item => <Td key={item.id}>{item.title}</Td>}
+                {item => (
+                    <Td key={item.id}>
+                        <Text noOfLines={1} display="block" maxWidth="90vw">
+                            {item.title}
+                        </Text>
+                    </Td>
+                )}
             </Table>
         </>
     );

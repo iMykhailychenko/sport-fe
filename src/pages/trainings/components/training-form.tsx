@@ -13,14 +13,18 @@ import {
     useToast,
     Flex,
     Box,
+    Text,
+    InputGroup,
+    InputLeftElement,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useForm } from 'react-hook-form';
-import { FcApproval, HiOutlineMinusSm, HiOutlinePlusSm } from 'react-icons/all';
+import { FcApproval, HiOutlineMinusSm, HiOutlinePlusSm, RiSearchLine } from 'react-icons/all';
 import { object, string } from 'yup';
 
 import { Table, Td } from '../../../components/table';
 import { errorToast, successToast } from '../../../config/toast.config';
+import { useFuseInput } from '../../../hooks/fuse.hook';
 import { useAllExercisesQuery } from '../../../query/exercises/exercises.hook';
 import { ExercisesType } from '../../../query/exercises/exercises.type';
 import { TrainingsBody } from '../../../query/trainings/trainings.type';
@@ -54,6 +58,7 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
     } = useForm<FormData>({ defaultValues, resolver: yupResolver(TrainingSchema) });
 
     const { data, isLoading } = useAllExercisesQuery();
+    const { search, list, onChange } = useFuseInput(data, ['title']);
 
     const [selectedExercises, setSelectedExercises] = useState<ID[]>(selected);
     const onAddExercise = (id: ID): void => setSelectedExercises(prev => [...prev, id]);
@@ -98,7 +103,15 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
             <Heading size="md" mt={10} mb={5}>
                 Додайте вправу
             </Heading>
-            <Table<ExercisesType> data={data ?? []} isLoading={isLoading} header={header}>
+
+            <InputGroup>
+                <InputLeftElement pointerEvents="none">
+                    <RiSearchLine />
+                </InputLeftElement>
+                <Input type="search" value={search} onChange={onChange} placeholder="Шукати" />
+            </InputGroup>
+
+            <Table<ExercisesType> data={list} isLoading={isLoading} header={header}>
                 {item => {
                     const isIncluded = selectedExercises.includes(item.id);
                     return (
@@ -110,7 +123,9 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
                                             <FcApproval />
                                         </Box>
                                     )}
-                                    {item.title}
+                                    <Text noOfLines={1} display="block" maxWidth="73vw">
+                                        {item.title}
+                                    </Text>
                                 </Flex>
                             </Td>
                             <Td>
@@ -125,6 +140,8 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
                     );
                 }}
             </Table>
+
+            <Box h="100px" />
         </>
     );
 };
