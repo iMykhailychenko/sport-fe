@@ -105,7 +105,7 @@ export const ExerciseForm = ({ onSubmit, defaultValues, buttonLabel }: Props): J
                 {item => (
                     <Tr>
                         <Td w="100%">
-                            <Text as={Link} to={`/exercises/${item.id}`} noOfLines={1} display="block" maxWidth="90vw">
+                            <Text as={Link} to={`/exercises/${item.id}`} noOfLines={1} display="block" maxWidth="80vw">
                                 {item.title}
                             </Text>
                         </Td>

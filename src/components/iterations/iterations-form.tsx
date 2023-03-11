@@ -32,16 +32,16 @@ export const IterationsForm = ({ date_id, exercise_id }: Props): JSX.Element => 
 
     return (
         <>
-            <Td w="35%">
+            <Td w="35%" py={6}>
                 <Input size="sm" placeholder="8 разів" type="number" {...register('repeat', { valueAsNumber: true })} />
             </Td>
-            <Td w="35%">
+            <Td w="35%" py={6}>
                 <Input size="sm" placeholder="70 кг" type="number" {...register('weight', { valueAsNumber: true })} />
             </Td>
-            <Td w="35%">
+            <Td w="35%" py={6}>
                 <Input size="sm" placeholder="30 хв" type="number" {...register('time', { valueAsNumber: true })} />
             </Td>
-            <Td>
+            <Td py={6}>
                 <IconButton size="sm" aria-label="Опції" onClick={handleSubmit(onSubmit)}>
                     <HiOutlinePlusSm />
                 </IconButton>

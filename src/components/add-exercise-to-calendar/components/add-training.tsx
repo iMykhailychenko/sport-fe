@@ -33,19 +33,12 @@ export const AddTraining = (): JSX.Element => {
     }, [dateFormat, selected]);
 
     return (
-        <FormControl mb={4}>
+        <FormControl mt={4} mb={10}>
             <Flex alignItems="center">
                 {isLoading ? (
-                    <Skeleton w="100%" h={6} />
+                    <Skeleton w="100%" h={10} />
                 ) : (
-                    <Select
-                        w="100%"
-                        size="sm"
-                        borderRadius="md"
-                        placeholder="Виберіть тренування"
-                        value={selected}
-                        onChange={onSelect}
-                    >
+                    <Select w="100%" borderRadius="md" placeholder="Виберіть тренування" value={selected} onChange={onSelect}>
                         {data?.map(item => (
                             <option key={item.id} value={item.id}>
                                 {item.title}
@@ -56,7 +49,8 @@ export const AddTraining = (): JSX.Element => {
 
                 <IconButton
                     ml={2}
-                    size="sm"
+                    w={6}
+                    h={10}
                     aria-label="Додати тренування"
                     colorScheme="blue"
                     disabled={!selected}

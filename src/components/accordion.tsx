@@ -35,13 +35,15 @@ export function Accordion<T extends { id: ID }>({ isLoading, header, children, d
     return (
         <ChakraAccordion allowMultiple>
             {data.map(item => (
-                <AccordionItem key={item.id}>
+                <AccordionItem key={item.id} border="none" mb={2}>
                     {({ isExpanded }) => (
                         <>
                             <Heading>
                                 <AccordionButton
                                     p={3}
                                     bg={bg}
+                                    border="none"
+                                    borderRadius="xl"
                                     _hover={{ bg: bg }}
                                     _focus={{ bg: bgActive }}
                                     _expanded={{ bg: bgActive }}
