@@ -25,10 +25,10 @@ export const IterationsList = (): JSX.Element => {
             {item => (
                 <>
                     <HStack spacing={2} my={4}>
-                        <Button leftIcon={<RiDeleteBinLine />} onClick={() => onDelete([item.id, item.exercise_id])}>
+                        <Button size="sm" leftIcon={<RiDeleteBinLine />} onClick={() => onDelete([item.id, item.exercise_id])}>
                             Видалити
                         </Button>
-                        <Button leftIcon={<FiInfo />} as={Link} to={`/exercises/${item.exercise_id}`}>
+                        <Button size="sm" leftIcon={<FiInfo />} as={Link} to={`/exercises/${item.exercise_id}`}>
                             Деталі вправи
                         </Button>
                     </HStack>
