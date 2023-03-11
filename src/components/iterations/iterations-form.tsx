@@ -32,17 +32,17 @@ export const IterationsForm = ({ date_id, exercise_id }: Props): JSX.Element => 
 
     return (
         <>
-            <Td w="30%">
-                <Input placeholder="8 разів" type="number" {...register('repeat', { valueAsNumber: true })} />
+            <Td w="35%">
+                <Input size="sm" placeholder="8 разів" type="number" {...register('repeat', { valueAsNumber: true })} />
             </Td>
-            <Td w="30%">
-                <Input placeholder="70 кг" type="number" {...register('weight', { valueAsNumber: true })} />
+            <Td w="35%">
+                <Input size="sm" placeholder="70 кг" type="number" {...register('weight', { valueAsNumber: true })} />
             </Td>
-            <Td w="30%">
-                <Input placeholder="30 хв" type="number" {...register('time', { valueAsNumber: true })} />
+            <Td w="35%">
+                <Input size="sm" placeholder="30 хв" type="number" {...register('time', { valueAsNumber: true })} />
             </Td>
             <Td>
-                <IconButton aria-label="Опції" onClick={handleSubmit(onSubmit)}>
+                <IconButton size="sm" aria-label="Опції" onClick={handleSubmit(onSubmit)}>
                     <HiOutlinePlusSm />
                 </IconButton>
             </Td>

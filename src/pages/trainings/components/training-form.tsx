@@ -131,6 +131,7 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
                             </Td>
                             <Td>
                                 <IconButton
+                                    size="sm"
                                     aria-label={isIncluded ? 'Видалити вправу' : 'Додати вправу'}
                                     onClick={() => (isIncluded ? onRemoveExercise(item.id) : onAddExercise(item.id))}
                                 >

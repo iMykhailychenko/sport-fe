@@ -54,7 +54,11 @@ export const AddExerciseTable = memo(({ item }: Props): JSX.Element => {
                 </Flex>
             </Td>
             <Td>
-                <IconButton aria-label="Додати вправу" onClick={() => (dateItem ? onDeleteExercises() : onAddExercises())}>
+                <IconButton
+                    size="sm"
+                    aria-label="Додати вправу"
+                    onClick={() => (dateItem ? onDeleteExercises() : onAddExercises())}
+                >
                     {dateItem ? <HiOutlineMinusSm /> : <HiOutlinePlusSm />}
                 </IconButton>
             </Td>

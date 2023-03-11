@@ -22,7 +22,7 @@ export const IterationsOptions = ({ iteration, refetch }: Props): JSX.Element =>
     return (
         <>
             <Menu>
-                <MenuButton as={IconButton} aria-label="Опції">
+                <MenuButton as={IconButton} aria-label="Опції" size="sm">
                     <Center>
                         <SlOptions />
                     </Center>

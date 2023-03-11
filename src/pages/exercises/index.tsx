@@ -41,7 +41,7 @@ const Exercises = (): JSX.Element => {
                             </Text>
                         </Td>
                         <Td>
-                            <IconButton as={Link} aria-label="Редагувати вправу" to={`/exercises/${item.id}/edit`}>
+                            <IconButton as={Link} aria-label="Редагувати вправу" to={`/exercises/${item.id}/edit`} size="sm">
                                 <BiEdit />
                             </IconButton>
                         </Td>

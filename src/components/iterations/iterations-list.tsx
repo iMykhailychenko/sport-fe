@@ -28,7 +28,7 @@ export const IterationsList = (): JSX.Element => {
                         <Button leftIcon={<RiDeleteBinLine />} onClick={() => onDelete([item.id, item.exercise_id])}>
                             Видалити
                         </Button>
-                        <Button leftIcon={<FiInfo />} as={Link} to={`/exercises/${item.id}`}>
+                        <Button leftIcon={<FiInfo />} as={Link} to={`/exercises/${item.exercise_id}`}>
                             Деталі вправи
                         </Button>
                     </HStack>

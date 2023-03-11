@@ -40,7 +40,7 @@ export function Accordion<T extends { id: ID }>({ isLoading, header, children, d
                         <>
                             <Heading>
                                 <AccordionButton
-                                    p={5}
+                                    p={3}
                                     bg={bg}
                                     _hover={{ bg: bg }}
                                     _focus={{ bg: bgActive }}

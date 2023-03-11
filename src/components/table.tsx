@@ -38,7 +38,7 @@ export function Table<T extends { id: ID }>({
 }: Props<T>): JSX.Element {
     return (
         <TableContainer>
-            <ChakraTable variant="simple">
+            <ChakraTable variant="simple" size="sm">
                 {header && (
                     <Thead>
                         <Tr>

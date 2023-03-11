@@ -26,9 +26,9 @@ export const IterationsItem = ({ date_id, exercise_id }: Props): JSX.Element => 
         >
             {item => (
                 <Tr>
-                    <Td w="30%">{item.repeat || '-'}</Td>
-                    <Td w="30%">{item.weight || '-'}</Td>
-                    <Td w="30%">{item.time || '-'}</Td>
+                    <Td w="35%">{item.repeat || '-'}</Td>
+                    <Td w="35%">{item.weight || '-'}</Td>
+                    <Td w="35%">{item.time || '-'}</Td>
                     <Td>
                         <IterationsOptions iteration={item} refetch={refetch} />
                     </Td>
