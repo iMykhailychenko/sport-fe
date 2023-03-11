@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 
 import {
-    Button,
-    Center,
     FormControl,
     FormErrorMessage,
     FormLabel,
     Heading,
     Input,
     IconButton,
-    useColorMode,
     useToast,
     Flex,
     Box,
@@ -23,6 +20,7 @@ import { useForm } from 'react-hook-form';
 import { FcApproval, HiOutlineMinusSm, HiOutlinePlusSm, RiSearchLine } from 'react-icons/all';
 import { object, string } from 'yup';
 
+import { FloatingButton } from '../../../components/floating-button';
 import { Table, Td } from '../../../components/table';
 import { errorToast, successToast } from '../../../config/toast.config';
 import { useFuseInput } from '../../../hooks/fuse.hook';
@@ -34,8 +32,6 @@ import { ID } from '../../../types/api';
 const TrainingSchema = object({
     title: string().min(3, 'Дуже коротка назва').required('Обовʼязкове поле'),
 });
-
-const header = ['Назва', ''];
 
 interface FormData {
     title: string;
@@ -49,8 +45,6 @@ interface Props {
 }
 export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = [] }: Props): JSX.Element => {
     const toast = useToast();
-    const { colorMode } = useColorMode();
-    const isDark = colorMode === 'dark';
 
     const {
         register,
@@ -84,21 +78,7 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
                     <Input autoFocus type="text" placeholder="Тренування А" {...register('title', { required: true })} />
                     <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
                 </FormControl>
-                <Center
-                    p={4}
-                    w="100%"
-                    left={0}
-                    bottom={20}
-                    position="fixed"
-                    borderTop="1px"
-                    zIndex={10}
-                    bg={isDark ? 'gray.800' : 'white'}
-                    borderColor={isDark ? 'gray.600' : 'gray.200'}
-                >
-                    <Button type="submit" colorScheme="blue">
-                        {buttonLabel}
-                    </Button>
-                </Center>
+                <FloatingButton>{buttonLabel}</FloatingButton>
             </form>
 
             <Heading size="md" mt={10} mb={5}>
@@ -112,7 +92,7 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
                 <Input type="search" value={search} onChange={onChange} placeholder="Шукати" />
             </InputGroup>
 
-            <Table<ExercisesType> data={list} isLoading={isLoading} header={header}>
+            <Table<ExercisesType> data={list} isLoading={isLoading}>
                 {item => {
                     const isIncluded = selectedExercises.includes(item.id);
                     return (
@@ -143,7 +123,7 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
                 }}
             </Table>
 
-            <Box h="100px" />
+            <Box h="150px" />
         </>
     );
 };

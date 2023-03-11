@@ -10,10 +10,11 @@ const CalendarPage = (): JSX.Element => {
         <>
             <Calendar />
 
-            <Box h={5} />
-            <IterationsList />
+            <Box my={4}>
+                <IterationsList />
+            </Box>
 
-            <Center mt={5} mb={2}>
+            <Center my={2}>
                 <Button onClick={onToggle}>{isOpen ? 'Згорнути' : 'Додати вправу'}</Button>
             </Center>
 

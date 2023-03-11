@@ -11,7 +11,7 @@ const NewExercise = (): JSX.Element => {
 
     return (
         <>
-            <Heading mb={6} size="md">
+            <Heading mb={2} size="md">
                 Додати нову вправу
             </Heading>
 

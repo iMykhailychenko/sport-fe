@@ -44,11 +44,11 @@ const EditExercise = (): JSX.Element => {
 
     return (
         <>
-            <Heading mb={6} size="md">
+            <Heading mb={4} size="md">
                 Редагувати вправу
             </Heading>
 
-            <Button mb={6} rightIcon={<RiDeleteBinLine />} onClick={onDelete}>
+            <Button mb={4} rightIcon={<RiDeleteBinLine />} onClick={onDelete}>
                 Видалити вправу
             </Button>
 

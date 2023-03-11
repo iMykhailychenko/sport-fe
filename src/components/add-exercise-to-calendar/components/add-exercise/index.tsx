@@ -10,8 +10,6 @@ import { Table } from '../../../table';
 
 import { AddExerciseTable } from './add-exercise-table';
 
-const header = ['', ''];
-
 export const AddExercise = (): JSX.Element => {
     const { data, isLoading } = useExercisesAllQuery();
     const { search, list, onChange } = useFuseInput(data, ['title']);
@@ -25,7 +23,7 @@ export const AddExercise = (): JSX.Element => {
                 <Input type="search" value={search} onChange={onChange} placeholder="Шукати" />
             </InputGroup>
 
-            <Table<ExercisesType> header={header} isLoading={isLoading} data={list}>
+            <Table<ExercisesType> isLoading={isLoading} data={list}>
                 {item => <AddExerciseTable item={item} />}
             </Table>
         </>

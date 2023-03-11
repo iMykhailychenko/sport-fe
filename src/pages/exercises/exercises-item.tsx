@@ -24,9 +24,11 @@ const ExercisesItem = (): JSX.Element => {
         return (
             <>
                 <Skeleton isLoaded={Boolean(exerciseData?.title)} mb={6}>
-                    <Heading size="lg">{exerciseData?.title}</Heading>
+                    <Heading size="md">{exerciseData?.title}</Heading>
                 </Skeleton>
-                <Heading my={10}>У вас немає данних про цю вправу.</Heading>
+                <Heading size="md" my={5}>
+                    У вас немає данних про цю вправу...
+                </Heading>
             </>
         );
     }
@@ -39,7 +41,7 @@ const ExercisesItem = (): JSX.Element => {
     return (
         <>
             <Skeleton isLoaded={Boolean(exerciseData?.title)} mb={6}>
-                <Heading size="lg">{exerciseData?.title}</Heading>
+                <Heading size="md">{exerciseData?.title}</Heading>
             </Skeleton>
 
             <Table<ExerciseIterations> isLoading={isLoading} data={data ?? []} header={header}>
@@ -47,7 +49,7 @@ const ExercisesItem = (): JSX.Element => {
                     <>
                         {item.date !== data?.[index - 1]?.date && (
                             <Tr>
-                                <Td colSpan={4} fontWeight="700">
+                                <Td colSpan={4} fontWeight="700" py={5}>
                                     {item.date}
                                 </Td>
                             </Tr>

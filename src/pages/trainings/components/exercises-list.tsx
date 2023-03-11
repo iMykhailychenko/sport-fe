@@ -9,8 +9,6 @@ import { ExercisesType } from '../../../query/exercises/exercises.type';
 import { useTrainingExercisesQuery } from '../../../query/trainings/trainings.hook';
 import { ID } from '../../../types/api';
 
-const header = ['Назва', ''];
-
 interface Props {
     id: ID;
 }
@@ -18,7 +16,7 @@ export const ExercisesList = ({ id }: Props): JSX.Element => {
     const { data, isLoading } = useTrainingExercisesQuery(id);
 
     return (
-        <Table<ExercisesType> data={data ?? []} isLoading={isLoading} header={header} loadingItems={1}>
+        <Table<ExercisesType> data={data ?? []} isLoading={isLoading} loadingItems={1}>
             {item => (
                 <Tr>
                     <Td w="100%">

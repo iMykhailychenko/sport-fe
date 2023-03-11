@@ -9,8 +9,6 @@ import { useFuseInput } from '../../hooks/fuse.hook';
 import { useExercisesAllQuery } from '../../query/exercises/exercises.hook';
 import { ExercisesType } from '../../query/exercises/exercises.type';
 
-const header = ['Назва', ''];
-
 const Exercises = (): JSX.Element => {
     const { data, isLoading } = useExercisesAllQuery();
     const { search, list, onChange } = useFuseInput(data, ['title']);
@@ -20,7 +18,7 @@ const Exercises = (): JSX.Element => {
             <Flex justifyContent="space-between" alignItems="center" mb={6}>
                 <Heading size="md">Список вправ</Heading>
 
-                <IconButton as={Link} aria-label="Додати нову вправу" to="/exercises/new">
+                <IconButton as={Link} aria-label="Додати нову вправу" to="/exercises/new" size="sm">
                     <HiOutlinePlusSm />
                 </IconButton>
             </Flex>
@@ -32,7 +30,7 @@ const Exercises = (): JSX.Element => {
                 <Input type="search" value={search} onChange={onChange} placeholder="Шукати" />
             </InputGroup>
 
-            <Table<ExercisesType> header={header} isLoading={isLoading} data={list}>
+            <Table<ExercisesType> isLoading={isLoading} data={list}>
                 {item => (
                     <Tr>
                         <Td w="100%">

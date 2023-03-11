@@ -24,7 +24,7 @@ export const IterationsList = (): JSX.Element => {
         <Accordion isLoading={isLoading} data={data ?? []} header={item => item.title}>
             {item => (
                 <>
-                    <HStack spacing={2} my={4}>
+                    <HStack spacing={2} my={2}>
                         <Button size="sm" leftIcon={<RiDeleteBinLine />} onClick={() => onDelete([item.id, item.exercise_id])}>
                             Видалити
                         </Button>

@@ -3,7 +3,6 @@ import React from 'react';
 import {
     Button,
     Collapse,
-    Flex,
     FormControl,
     FormErrorMessage,
     FormLabel,
@@ -14,12 +13,17 @@ import {
     Text,
     useDisclosure,
     Tr,
+    IconButton,
+    Center,
+    Box,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useForm } from 'react-hook-form';
+import { BiEdit } from 'react-icons/all';
 import { Link } from 'react-router-dom';
 import { object, string } from 'yup';
 
+import { FloatingButton } from '../../../components/floating-button';
 import { Table, Td } from '../../../components/table';
 import { useFuse } from '../../../hooks/fuse.hook';
 import { useExercisesAllQuery } from '../../../query/exercises/exercises.hook';
@@ -84,31 +88,37 @@ export const ExerciseForm = ({ onSubmit, defaultValues, buttonLabel }: Props): J
                     </Stack>
                 </Collapse>
 
-                <Flex alignItems="center" justifyContent="space-between" my={6}>
+                <Center my={4}>
                     <Button w="48%" onClick={onToggle}>
                         {isOpen ? 'Приховати деталі' : 'Додати деталі'}
                     </Button>
+                </Center>
 
-                    <Button w="48%" type="submit" colorScheme="blue">
-                        {buttonLabel}
-                    </Button>
-                </Flex>
+                <FloatingButton>{buttonLabel}</FloatingButton>
             </form>
 
-            <Heading mb={4} mt={10} size="md">
+            <Heading my={4} size="md">
                 Схожі вправи
             </Heading>
-            <Table<ExercisesType> header={['Назва']} data={list} isLoading={isLoading}>
+
+            <Table<ExercisesType> data={list} isLoading={isLoading}>
                 {item => (
                     <Tr>
-                        <Td key={item.id}>
+                        <Td w="100%">
                             <Text as={Link} to={`/exercises/${item.id}`} noOfLines={1} display="block" maxWidth="90vw">
                                 {item.title}
                             </Text>
                         </Td>
+                        <Td>
+                            <IconButton as={Link} aria-label="Редагувати вправу" to={`/exercises/${item.id}/edit`} size="sm">
+                                <BiEdit />
+                            </IconButton>
+                        </Td>
                     </Tr>
                 )}
             </Table>
+
+            <Box h="150px" />
         </>
     );
 };

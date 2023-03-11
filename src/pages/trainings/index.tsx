@@ -24,7 +24,7 @@ const Trainings = (): JSX.Element => {
             <Flex justifyContent="space-between" alignItems="center" mb={6}>
                 <Heading size="md">Список тренувань</Heading>
 
-                <IconButton as={Link} aria-label="Додати нову вправу" to="/trainings/new">
+                <IconButton as={Link} aria-label="Додати нову вправу" to="/trainings/new" size="sm">
                     <HiOutlinePlusSm />
                 </IconButton>
             </Flex>
@@ -32,12 +32,12 @@ const Trainings = (): JSX.Element => {
             <Accordion<TrainingsType> isLoading={isLoading} data={data ?? []} header={item => item.title}>
                 {item => (
                     <>
-                        <Flex justifyContent="space-between" alignItems="center">
-                            <Button w="49%" rightIcon={<RiDeleteBinLine />} onClick={() => onDelete(item.id)}>
+                        <Flex alignItems="center">
+                            <Button size="sm" mr={4} rightIcon={<RiDeleteBinLine />} onClick={() => onDelete(item.id)}>
                                 Видалити
                             </Button>
 
-                            <Button w="49%" rightIcon={<BiEdit />} as={Link} to={`/trainings/${item.id}`}>
+                            <Button size="sm" rightIcon={<BiEdit />} as={Link} to={`/trainings/${item.id}`}>
                                 Редагувати
                             </Button>
                         </Flex>

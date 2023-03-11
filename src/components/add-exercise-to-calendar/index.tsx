@@ -7,8 +7,8 @@ import { AddTraining } from './components/add-training';
 
 export const AddExerciseToCalendar = (): JSX.Element => {
     return (
-        <Box my={6}>
-            <Heading size="lg" mt={10} mb={5}>
+        <Box my={2}>
+            <Heading size="md" my={2}>
                 Додайте вправу на цей день
             </Heading>
             <AddTraining />
