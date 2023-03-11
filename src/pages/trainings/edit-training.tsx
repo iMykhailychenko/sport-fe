@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ListLoader } from '../../components/list-loader';
-import { useTrainingExercisesQuery, useTrainingQuery, useUpdateAllTrainingsMutation } from '../../query/trainings/trainings.hook';
+import { useTrainingExercisesQuery, useTrainingQuery, useTrainingsUpdateAllMutation } from '../../query/trainings/trainings.hook';
 import { TrainingsBody } from '../../query/trainings/trainings.type';
 
 import { TrainingForm } from './components/training-form';
@@ -14,7 +14,7 @@ const EditTraining = (): JSX.Element => {
     const params = useParams();
     const trainingId = Number(params.trainingId);
 
-    const { mutateAsync } = useUpdateAllTrainingsMutation();
+    const { mutateAsync } = useTrainingsUpdateAllMutation();
 
     const { data: training, isLoading: isTrainingLoading } = useTrainingQuery(trainingId);
     const { data: exercises, isLoading: isExercisesLoading } = useTrainingExercisesQuery(trainingId);

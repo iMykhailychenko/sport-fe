@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Fragment } from 'react';
 
 import {
     TableContainer,
@@ -52,14 +52,14 @@ export function Table<T extends { id: ID }>({
                     {isLoading
                         ? range(loadingItems).map(item => (
                               <Tr key={item}>
-                                  {(header ?? [1]).map(inner => (
+                                  {(header ?? [1]).map((_, inner) => (
                                       <Td key={`${item}-${inner}`}>
                                           <Skeleton h="40px" w="100%" />
                                       </Td>
                                   ))}
                               </Tr>
                           ))
-                        : data.map((item, index) => <Tr key={item.id}>{children(item, index)}</Tr>)}
+                        : data.map((item, index) => <Fragment key={item.id}>{children(item, index)}</Fragment>)}
                 </Tbody>
 
                 {footer && (

@@ -1,11 +1,15 @@
 import { privateApi } from '../../api/api';
 import { ID } from '../../types/api';
 
-import { Iteration, IterationBody, UpdateIterationBody } from './iterations.type';
+import { ExerciseIterations, Iteration, IterationBody, UpdateIterationBody } from './iterations.type';
 
 class IterationsFetcher {
     get = (date_id: ID, exercise_id: ID): Promise<Iteration[]> => {
         return privateApi.get<Iteration[]>(`/iterations/${date_id}/${exercise_id}`).then(response => response.data);
+    };
+
+    getExercise = (exercise_id: ID): Promise<ExerciseIterations[]> => {
+        return privateApi.get<ExerciseIterations[]>(`/iterations/${exercise_id}`).then(response => response.data);
     };
 
     create = async (body: IterationBody): Promise<void> => {

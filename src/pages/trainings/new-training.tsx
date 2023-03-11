@@ -2,14 +2,14 @@ import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { useCreateTrainingsMutation } from '../../query/trainings/trainings.hook';
+import { useTrainingsCreateMutation } from '../../query/trainings/trainings.hook';
 import { TrainingsBody } from '../../query/trainings/trainings.type';
 
 import { TrainingForm } from './components/training-form';
 
 const NewTraining = (): JSX.Element => {
     const navigate = useNavigate();
-    const { mutateAsync } = useCreateTrainingsMutation();
+    const { mutateAsync } = useTrainingsCreateMutation();
 
     const onSubmit = async (data: TrainingsBody): Promise<void> => {
         await mutateAsync(data);

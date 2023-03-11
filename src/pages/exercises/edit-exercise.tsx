@@ -5,7 +5,7 @@ import { RiDeleteBinLine } from 'react-icons/all';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ListLoader } from '../../components/list-loader';
-import { useDeleteExercisesMutation, useExerciseQuery, useUpdateExercisesMutation } from '../../query/exercises/exercises.hook';
+import { useExercisesDeleteMutation, useExerciseQuery, useExercisesUpdateMutation } from '../../query/exercises/exercises.hook';
 import { ExercisesBody, ExercisesType } from '../../query/exercises/exercises.type';
 
 import { ExerciseForm } from './components/exercise-form';
@@ -22,8 +22,8 @@ const EditExercise = (): JSX.Element => {
         }
     }, [isError]);
 
-    const { mutateAsync: updateExercisesMutation } = useUpdateExercisesMutation();
-    const { mutate: deleteExercisesMutation } = useDeleteExercisesMutation();
+    const { mutateAsync: updateExercisesMutation } = useExercisesUpdateMutation();
+    const { mutate: deleteExercisesMutation } = useExercisesDeleteMutation();
 
     const onSubmit = async (data: ExercisesBody): Promise<void> => {
         try {

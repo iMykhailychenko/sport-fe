@@ -1,5 +1,4 @@
-import { IconButton } from '@chakra-ui/react';
-import { SlOptions } from 'react-icons/all';
+import { Tr } from '@chakra-ui/react';
 
 import { useIterationsQuery } from '../../query/iterations/iterations.hook';
 import { Iteration } from '../../query/iterations/iterations.type';
@@ -26,14 +25,14 @@ export const IterationsItem = ({ date_id, exercise_id }: Props): JSX.Element => 
             footer={<IterationsForm date_id={date_id} exercise_id={exercise_id} />}
         >
             {item => (
-                <>
+                <Tr>
                     <Td w="30%">{item.repeat || '-'}</Td>
                     <Td w="30%">{item.weight || '-'}</Td>
                     <Td w="30%">{item.time || '-'}</Td>
                     <Td>
                         <IterationsOptions iteration={item} refetch={refetch} />
                     </Td>
-                </>
+                </Tr>
             )}
         </Table>
     );

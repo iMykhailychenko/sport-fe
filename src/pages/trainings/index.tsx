@@ -5,15 +5,15 @@ import { BiEdit, HiOutlinePlusSm, RiDeleteBinLine } from 'react-icons/all';
 import { Link } from 'react-router-dom';
 
 import { Accordion } from '../../components/accordion';
-import { useAllTrainingsQuery, useDeleteTrainingMutation } from '../../query/trainings/trainings.hook';
+import { useTrainingsAllQuery, useTrainingsDeleteMutation } from '../../query/trainings/trainings.hook';
 import { TrainingsType } from '../../query/trainings/trainings.type';
 import { ID } from '../../types/api';
 
 import { ExercisesList } from './components/exercises-list';
 
 const Trainings = (): JSX.Element => {
-    const { data, isLoading, refetch } = useAllTrainingsQuery();
-    const { mutate } = useDeleteTrainingMutation();
+    const { data, isLoading, refetch } = useTrainingsAllQuery();
+    const { mutate } = useTrainingsDeleteMutation();
 
     const onDelete = (id: ID): void => {
         mutate(id, { onSuccess: () => refetch() });

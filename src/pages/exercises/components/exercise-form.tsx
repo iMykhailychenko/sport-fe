@@ -13,14 +13,16 @@ import {
     Heading,
     Text,
     useDisclosure,
+    Tr,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { object, string } from 'yup';
 
 import { Table, Td } from '../../../components/table';
 import { useFuse } from '../../../hooks/fuse.hook';
-import { useAllExercisesQuery } from '../../../query/exercises/exercises.hook';
+import { useExercisesAllQuery } from '../../../query/exercises/exercises.hook';
 import { ExercisesBody, ExercisesType } from '../../../query/exercises/exercises.type';
 
 const ExerciseSchema = object({
@@ -45,7 +47,7 @@ export const ExerciseForm = ({ onSubmit, defaultValues, buttonLabel }: Props): J
         formState: { errors },
     } = useForm<ExercisesBody>({ defaultValues, resolver: yupResolver(ExerciseSchema) });
 
-    const { data, refetch, isLoading } = useAllExercisesQuery();
+    const { data, refetch, isLoading } = useExercisesAllQuery();
 
     const title = watch('title') || '';
     const list = useFuse(data, title, ['title']);
@@ -98,11 +100,13 @@ export const ExerciseForm = ({ onSubmit, defaultValues, buttonLabel }: Props): J
             </Heading>
             <Table<ExercisesType> header={['Назва']} data={list} isLoading={isLoading}>
                 {item => (
-                    <Td key={item.id}>
-                        <Text noOfLines={1} display="block" maxWidth="90vw">
-                            {item.title}
-                        </Text>
-                    </Td>
+                    <Tr>
+                        <Td key={item.id}>
+                            <Text as={Link} to={`/exercises/${item.id}`} noOfLines={1} display="block" maxWidth="90vw">
+                                {item.title}
+                            </Text>
+                        </Td>
+                    </Tr>
                 )}
             </Table>
         </>

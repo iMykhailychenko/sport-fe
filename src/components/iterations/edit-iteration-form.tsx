@@ -14,7 +14,7 @@ import {
 import { omit } from 'lodash-es';
 import { useForm } from 'react-hook-form';
 
-import { useUpdateIterationMutation } from '../../query/iterations/iterations.hook';
+import { useIterationsUpdateMutation } from '../../query/iterations/iterations.hook';
 import { Iteration } from '../../query/iterations/iterations.type';
 
 import { IterationForm } from './type';
@@ -27,7 +27,7 @@ interface Props {
 export const EditIterationForm = ({ onClose, iteration, refetch }: Props): JSX.Element => {
     const id = `edit-iteration-${iteration.id}`;
 
-    const { mutate } = useUpdateIterationMutation();
+    const { mutate } = useIterationsUpdateMutation();
     const { register, handleSubmit } = useForm<IterationForm>({ defaultValues: omit(iteration, ['date_id', 'exercise_id']) });
 
     const onSubmit = (data: IterationForm): void => {

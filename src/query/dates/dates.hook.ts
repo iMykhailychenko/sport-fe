@@ -24,6 +24,6 @@ export const useDatesCreateAllMutation = (): UseMutationResult<void, unknown, Da
     return useMutation({ mutationFn: dateFetcher.createAll });
 };
 
-export const useDeleteDatesMutation = (): UseMutationResult<void, unknown, ID> => {
+export const useDatesDeleteMutation = (): UseMutationResult<void, unknown, [ID, ID]> => {
     return useMutation({ mutationFn: dateFetcher.delete });
 };

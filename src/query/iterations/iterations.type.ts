@@ -17,6 +17,10 @@ export interface Iteration {
     exercise_id: ID;
 }
 
+export interface ExerciseIterations extends Omit<Iteration, 'date_id'> {
+    date: string;
+}
+
 export interface UpdateIterationBody {
     id: number;
     time?: number;

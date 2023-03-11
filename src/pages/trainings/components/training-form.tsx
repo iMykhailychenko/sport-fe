@@ -16,6 +16,7 @@ import {
     Text,
     InputGroup,
     InputLeftElement,
+    Tr,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useForm } from 'react-hook-form';
@@ -25,7 +26,7 @@ import { object, string } from 'yup';
 import { Table, Td } from '../../../components/table';
 import { errorToast, successToast } from '../../../config/toast.config';
 import { useFuseInput } from '../../../hooks/fuse.hook';
-import { useAllExercisesQuery } from '../../../query/exercises/exercises.hook';
+import { useExercisesAllQuery } from '../../../query/exercises/exercises.hook';
 import { ExercisesType } from '../../../query/exercises/exercises.type';
 import { TrainingsBody } from '../../../query/trainings/trainings.type';
 import { ID } from '../../../types/api';
@@ -57,7 +58,7 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
         formState: { errors },
     } = useForm<FormData>({ defaultValues, resolver: yupResolver(TrainingSchema) });
 
-    const { data, isLoading } = useAllExercisesQuery();
+    const { data, isLoading } = useExercisesAllQuery();
     const { search, list, onChange } = useFuseInput(data, ['title']);
 
     const [selectedExercises, setSelectedExercises] = useState<ID[]>(selected);
@@ -115,7 +116,7 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
                 {item => {
                     const isIncluded = selectedExercises.includes(item.id);
                     return (
-                        <>
+                        <Tr>
                             <Td w="100%">
                                 <Flex alignItems="center">
                                     {isIncluded && (
@@ -136,7 +137,7 @@ export const TrainingForm = ({ defaultValues, buttonLabel, onSubmit, selected = 
                                     {isIncluded ? <HiOutlineMinusSm /> : <HiOutlinePlusSm />}
                                 </IconButton>
                             </Td>
-                        </>
+                        </Tr>
                     );
                 }}
             </Table>

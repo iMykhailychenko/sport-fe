@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IconButton, Text } from '@chakra-ui/react';
+import { IconButton, Text, Tr } from '@chakra-ui/react';
 import { BiEdit } from 'react-icons/all';
 import { Link } from 'react-router-dom';
 
@@ -20,18 +20,18 @@ export const ExercisesList = ({ id }: Props): JSX.Element => {
     return (
         <Table<ExercisesType> data={data ?? []} isLoading={isLoading} header={header} loadingItems={1}>
             {item => (
-                <>
+                <Tr>
                     <Td w="100%">
-                        <Text noOfLines={1} display="block" maxWidth="80vw">
+                        <Text as={Link} to={`/exercises/${item.id}`} noOfLines={1} display="block" maxWidth="80vw">
                             {item.title}
                         </Text>
                     </Td>
                     <Td>
-                        <IconButton as={Link} aria-label="Редагувати вправу" to={`/exercises/${item.id}`}>
+                        <IconButton as={Link} aria-label="Редагувати вправу" to={`/exercises/${item.id}/edit`}>
                             <BiEdit />
                         </IconButton>
                     </Td>
-                </>
+                </Tr>
             )}
         </Table>
     );

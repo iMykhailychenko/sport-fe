@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { Heading, Flex, IconButton, Text, InputLeftElement, Input, InputGroup } from '@chakra-ui/react';
+import { Heading, Flex, IconButton, Text, InputLeftElement, Input, InputGroup, Tr } from '@chakra-ui/react';
 import { HiOutlinePlusSm, BiEdit, RiSearchLine } from 'react-icons/all';
 import { Link } from 'react-router-dom';
 
 import { Table, Td } from '../../components/table';
 import { useFuseInput } from '../../hooks/fuse.hook';
-import { useAllExercisesQuery } from '../../query/exercises/exercises.hook';
+import { useExercisesAllQuery } from '../../query/exercises/exercises.hook';
 import { ExercisesType } from '../../query/exercises/exercises.type';
 
 const header = ['Назва', ''];
 
 const Exercises = (): JSX.Element => {
-    const { data, isLoading } = useAllExercisesQuery();
+    const { data, isLoading } = useExercisesAllQuery();
     const { search, list, onChange } = useFuseInput(data, ['title']);
 
     return (
@@ -34,18 +34,18 @@ const Exercises = (): JSX.Element => {
 
             <Table<ExercisesType> header={header} isLoading={isLoading} data={list}>
                 {item => (
-                    <>
+                    <Tr>
                         <Td w="100%">
-                            <Text noOfLines={1} display="block" maxWidth="73vw">
+                            <Text as={Link} to={`/exercises/${item.id}`} noOfLines={1} display="block" maxWidth="73vw">
                                 {item.title}
                             </Text>
                         </Td>
                         <Td>
-                            <IconButton as={Link} aria-label="Редагувати вправу" to={`/exercises/${item.id}`}>
+                            <IconButton as={Link} aria-label="Редагувати вправу" to={`/exercises/${item.id}/edit`}>
                                 <BiEdit />
                             </IconButton>
                         </Td>
-                    </>
+                    </Tr>
                 )}
             </Table>
         </>

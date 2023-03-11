@@ -1,7 +1,7 @@
 import { useDisclosure, Center, IconButton, Menu, MenuButton, MenuList, MenuItem, Drawer } from '@chakra-ui/react';
 import { RiDeleteBinLine, SlOptions, BiEdit } from 'react-icons/all';
 
-import { useDeleteIterationMutation } from '../../query/iterations/iterations.hook';
+import { useIterationsDeleteMutation } from '../../query/iterations/iterations.hook';
 import { Iteration } from '../../query/iterations/iterations.type';
 
 import { EditIterationForm } from './edit-iteration-form';
@@ -13,7 +13,7 @@ interface Props {
 export const IterationsOptions = ({ iteration, refetch }: Props): JSX.Element => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const { mutate: deleteIteration } = useDeleteIterationMutation();
+    const { mutate: deleteIteration } = useIterationsDeleteMutation();
 
     const handleDelete = (): void => {
         deleteIteration(iteration.id, { onSuccess: () => refetch() });

@@ -6,7 +6,7 @@ import { ID } from '../../types/api';
 import { trainingFetcher } from './exercises.fetcher';
 import { ExercisesBody, ExercisesType } from './exercises.type';
 
-export const useAllExercisesQuery = (): UseQueryResult<ExercisesType[]> => {
+export const useExercisesAllQuery = (): UseQueryResult<ExercisesType[]> => {
     return useQuery<ExercisesType[]>({
         queryKey: ['exercises'],
         queryFn: trainingFetcher.getAll,
@@ -26,14 +26,14 @@ export const useExerciseQuery = (id?: ID): UseQueryResult<ExercisesType> => {
     });
 };
 
-export const useCreateExercisesMutation = (): UseMutationResult<void, unknown, ExercisesBody> => {
+export const useExercisesCreateMutation = (): UseMutationResult<void, unknown, ExercisesBody> => {
     return useMutation({ mutationKey: ['exercises', 'new'], mutationFn: trainingFetcher.create });
 };
 
-export const useUpdateExercisesMutation = (): UseMutationResult<void, unknown, ExercisesType> => {
+export const useExercisesUpdateMutation = (): UseMutationResult<void, unknown, ExercisesType> => {
     return useMutation({ mutationKey: ['exercises', 'new'], mutationFn: trainingFetcher.update });
 };
 
-export const useDeleteExercisesMutation = (): UseMutationResult<void, unknown, ID> => {
+export const useExercisesDeleteMutation = (): UseMutationResult<void, unknown, ID> => {
     return useMutation({ mutationKey: ['exercises', 'new'], mutationFn: trainingFetcher.delete });
 };

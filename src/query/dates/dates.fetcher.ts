@@ -16,8 +16,8 @@ class DateFetcher {
         await privateApi.post<void>('/dates/training', body);
     };
 
-    delete = async (date_id: ID): Promise<void> => {
-        await privateApi.delete<void>(`/dates/${date_id}`);
+    delete = async ([date_id, exercise_id]: [ID, ID]): Promise<void> => {
+        await privateApi.delete<void>(`/dates/${date_id}/${exercise_id}`);
     };
 }
 

@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Heading } from '@chakra-ui/react';
 
-import { useCreateExercisesMutation } from '../../query/exercises/exercises.hook';
+import { useExercisesCreateMutation } from '../../query/exercises/exercises.hook';
 
 import { ExerciseForm } from './components/exercise-form';
 
 const NewExercise = (): JSX.Element => {
-    const { mutateAsync } = useCreateExercisesMutation();
+    const { mutateAsync } = useExercisesCreateMutation();
 
     return (
         <>

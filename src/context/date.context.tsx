@@ -13,6 +13,7 @@ interface DateContextType {
     onReset: () => void;
     totalDays: number;
     dateFormat: string;
+    setDateFromString: (date: string) => void;
 }
 export const DateContext = createContext<DateContextType>({} as DateContextType);
 
@@ -30,8 +31,17 @@ export const DateProvider = ({ children }: Record<'children', ReactNode>) => {
 
     const totalDays = useMemo(() => new Date(year, month + 1, 0).getDate(), [year, month]);
 
+    const setDateFromString = useCallback((date: string): void => {
+        const [day, month, year] = date.split('-');
+        if (day) setDay(Number(day));
+        if (month) setMonth(Number(month));
+        if (year) setYear(Number(year));
+    }, []);
+
     return (
-        <DateContext.Provider value={{ day, setDay, month, setMonth, year, setYear, onReset, totalDays, dateFormat }}>
+        <DateContext.Provider
+            value={{ day, setDay, month, setMonth, year, setYear, onReset, totalDays, dateFormat, setDateFromString }}
+        >
             {children}
         </DateContext.Provider>
     );

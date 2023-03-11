@@ -7,7 +7,7 @@ import { ExercisesType } from '../exercises/exercises.type';
 import { trainingsFetcher } from './trainings.fetcher';
 import { TrainingsBody, TrainingsType, UpdateTrainingsType } from './trainings.type';
 
-export const useAllTrainingsQuery = (): UseQueryResult<TrainingsType[]> => {
+export const useTrainingsAllQuery = (): UseQueryResult<TrainingsType[]> => {
     return useQuery<TrainingsType[]>({
         queryKey: ['trainings'],
         queryFn: trainingsFetcher.getAll,
@@ -35,26 +35,26 @@ export const useTrainingExercisesQuery = (id: ID): UseQueryResult<ExercisesType[
     });
 };
 
-export const useCreateTrainingsMutation = (): UseMutationResult<void, unknown, TrainingsBody> => {
+export const useTrainingsCreateMutation = (): UseMutationResult<void, unknown, TrainingsBody> => {
     return useMutation({ mutationFn: trainingsFetcher.create });
 };
 
-export const useDeleteTrainingMutation = (): UseMutationResult<void, unknown, ID> => {
+export const useTrainingsDeleteMutation = (): UseMutationResult<void, unknown, ID> => {
     return useMutation({ mutationFn: trainingsFetcher.delete });
 };
 
-export const useUpdateAllTrainingsMutation = (): UseMutationResult<void, unknown, UpdateTrainingsType> => {
+export const useTrainingsUpdateAllMutation = (): UseMutationResult<void, unknown, UpdateTrainingsType> => {
     return useMutation({ mutationFn: trainingsFetcher.updateAll });
 };
 
-export const useUpdateTrainingsMutation = (): UseMutationResult<void, unknown, TrainingsType> => {
+export const useTrainingsUpdateMutation = (): UseMutationResult<void, unknown, TrainingsType> => {
     return useMutation({ mutationFn: trainingsFetcher.update });
 };
 
-export const useDeleteTrainingExerciseMutation = (): UseMutationResult<void, unknown, [ID, ID]> => {
+export const useTrainingsExerciseDeleteMutation = (): UseMutationResult<void, unknown, [ID, ID]> => {
     return useMutation({ mutationFn: trainingsFetcher.deleteExercise });
 };
 
-export const useCreateTrainingsExerciseMutation = (): UseMutationResult<void, unknown, [ID, ID]> => {
+export const useTrainingsExerciseCreateMutation = (): UseMutationResult<void, unknown, [ID, ID]> => {
     return useMutation({ mutationFn: trainingsFetcher.createExercise });
 };

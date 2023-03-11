@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { HiOutlinePlusSm } from 'react-icons/all';
 
-import { useCreateIterationMutation } from '../../query/iterations/iterations.hook';
+import { useIterationsCreateMutation } from '../../query/iterations/iterations.hook';
 import { ID } from '../../types/api';
 import { Td } from '../table';
 
@@ -18,7 +18,7 @@ interface Props {
 
 export const IterationsForm = ({ date_id, exercise_id }: Props): JSX.Element => {
     const queryClient = useQueryClient();
-    const { mutate } = useCreateIterationMutation();
+    const { mutate } = useIterationsCreateMutation();
     const { register, handleSubmit } = useForm<IterationForm>();
 
     const onSubmit = ({ time, repeat, weight }: IterationForm): void => {

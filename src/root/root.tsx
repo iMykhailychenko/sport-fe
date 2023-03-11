@@ -20,6 +20,7 @@ const EditTraining = lazy(() => import('../pages/trainings/edit-training'));
 const Exercises = lazy(() => import('../pages/exercises'));
 const NewExercise = lazy(() => import('../pages/exercises/new-exercise'));
 const EditExercise = lazy(() => import('../pages/exercises/edit-exercise'));
+const ExercisesItem = lazy(() => import('../pages/exercises/exercises-item'));
 
 const LazyComponent = (): JSX.Element => (
     <Suspense fallback={null}>
@@ -49,7 +50,8 @@ export const Root = (): JSX.Element => {
 
                         <Route path="exercises" element={<Exercises />} />
                         <Route path="exercises/new" element={<NewExercise />} />
-                        <Route path="exercises/:exerciseId" element={<EditExercise />} />
+                        <Route path="exercises/:exerciseId" element={<ExercisesItem />} />
+                        <Route path="exercises/:exerciseId/edit" element={<EditExercise />} />
                     </Route>
                 </Route>
 
