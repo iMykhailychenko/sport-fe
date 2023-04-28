@@ -52,7 +52,7 @@ const Chart = ({ name, data }: Props): JSX.Element => {
         }
     }, [data, name]);
 
-    return <canvas ref={ref} height="450px" style={{ marginBottom: '40px' }} />;
+    return <canvas ref={ref} height="400px" style={{ marginBottom: '40px' }} />;
 };
 
 export default Chart;
