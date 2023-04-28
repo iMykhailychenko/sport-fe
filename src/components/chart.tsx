@@ -28,11 +28,12 @@ const Chart = ({ name, data }: Props): JSX.Element => {
     const ref = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
+        let chart: ChartJS;
         if (ref.current) {
             const labels = Object.keys(data).reverse();
             console.log(labels.map(label => sum(data[label].map(item => item.weight))));
 
-            new ChartJS(ref.current, {
+            chart = new ChartJS(ref.current, {
                 options,
                 type: 'line',
                 data: {
@@ -50,6 +51,9 @@ const Chart = ({ name, data }: Props): JSX.Element => {
                 },
             });
         }
+        return () => {
+            chart.destroy();
+        };
     }, [data, name]);
 
     return <canvas ref={ref} height="400px" style={{ marginBottom: '40px' }} />;
