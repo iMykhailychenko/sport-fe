@@ -7,7 +7,7 @@ import { useDate } from '../context/date.context';
 import { useDatesCalendarQuery } from '../query/dates/dates.hook';
 import { allYears, monthList, weekList } from '../utils/calendar';
 
-import { DateNavigation } from './date-navigation';
+import { MonthNavigation } from './month-navigation';
 
 export const Calendar = (): JSX.Element => {
     const { day, month, year, setDay, setMonth, setYear, totalDays } = useDate();
@@ -21,7 +21,7 @@ export const Calendar = (): JSX.Element => {
 
     return (
         <>
-            <DateNavigation>
+            <MonthNavigation>
                 <Select placeholder="Select year" value={year} onChange={onChangeYear} w="33%">
                     {allYears.map(y => (
                         <option key={y} value={y}>
@@ -37,7 +37,7 @@ export const Calendar = (): JSX.Element => {
                         </option>
                     ))}
                 </Select>
-            </DateNavigation>
+            </MonthNavigation>
 
             <Grid templateColumns="repeat(7, 1fr)" gap={1}>
                 {weekList.map(d => (

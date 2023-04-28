@@ -8,13 +8,13 @@ import { useDate } from '../context/date.context';
 interface Props {
     children: ReactNode;
 }
-export const DateNavigation = ({ children }: Props): JSX.Element => {
-    const { setDay, totalDays } = useDate();
+export const MonthNavigation = ({ children }: Props): JSX.Element => {
+    const { setMonth } = useDate();
 
     const onPrev = useCallback((): void => {
-        setDay(prev => {
+        setMonth(prev => {
             if (prev <= 1) {
-                return totalDays;
+                return 12;
             }
 
             return prev - 1;
@@ -22,24 +22,24 @@ export const DateNavigation = ({ children }: Props): JSX.Element => {
     }, []);
 
     const onNext = useCallback((): void => {
-        setDay(prev => {
-            if (prev >= totalDays) {
+        setMonth(prev => {
+            if (prev > 12) {
                 return 1;
             }
 
             return prev + 1;
         });
-    }, [totalDays]);
+    }, []);
 
     return (
         <Flex alignItems="center" justifyContent="space-between" mb={4}>
-            <IconButton aria-label="Попередній день" onClick={onPrev}>
+            <IconButton aria-label="Попередній місяць" onClick={onPrev}>
                 <FiChevronLeft />
             </IconButton>
 
             {children}
 
-            <IconButton aria-label="Наступний день" onClick={onNext}>
+            <IconButton aria-label="Наступний місяць" onClick={onNext}>
                 <FiChevronRight />
             </IconButton>
         </Flex>
