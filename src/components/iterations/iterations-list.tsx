@@ -1,6 +1,6 @@
 import { HStack, Button } from '@chakra-ui/react';
 import { FiInfo, RiDeleteBinLine } from 'react-icons/all';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useDateQuery, useDatesDeleteMutation } from '../../query/dates/dates.hook';
 import { ID } from '../../types/api';
@@ -9,6 +9,7 @@ import { Accordion } from '../accordion';
 import { IterationsItem } from './iterations-item';
 
 export const IterationsList = (): JSX.Element => {
+    const location = useLocation();
     const { data, refetch, isLoading } = useDateQuery();
     const { mutate } = useDatesDeleteMutation();
 
@@ -28,7 +29,13 @@ export const IterationsList = (): JSX.Element => {
                         <Button size="sm" leftIcon={<RiDeleteBinLine />} onClick={() => onDelete([item.id, item.exercise_id])}>
                             Видалити
                         </Button>
-                        <Button size="sm" leftIcon={<FiInfo />} as={Link} to={`/exercises/${item.exercise_id}`}>
+                        <Button
+                            size="sm"
+                            as={Link}
+                            leftIcon={<FiInfo />}
+                            state={{ from: location }}
+                            to={`/exercises/${item.exercise_id}`}
+                        >
                             Деталі вправи
                         </Button>
                     </HStack>

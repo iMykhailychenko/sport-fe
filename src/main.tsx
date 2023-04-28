@@ -9,7 +9,15 @@ import { DateProvider } from './context/date.context';
 import { Root } from './root/root';
 import theme from './utils/theme';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: 300_000, // 5 min
+            refetchOnWindowFocus: false,
+            retry: false,
+        },
+    },
+});
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <ChakraProvider theme={theme}>

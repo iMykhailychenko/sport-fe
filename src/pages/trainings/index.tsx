@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button, Flex, Heading, IconButton } from '@chakra-ui/react';
 import { BiEdit, HiOutlinePlusSm, RiDeleteBinLine } from 'react-icons/all';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Accordion } from '../../components/accordion';
 import { useTrainingsAllQuery, useTrainingsDeleteMutation } from '../../query/trainings/trainings.hook';
@@ -12,6 +12,7 @@ import { ID } from '../../types/api';
 import { ExercisesList } from './components/exercises-list';
 
 const Trainings = (): JSX.Element => {
+    const location = useLocation();
     const { data, isLoading, refetch } = useTrainingsAllQuery();
     const { mutate } = useTrainingsDeleteMutation();
 
@@ -24,7 +25,7 @@ const Trainings = (): JSX.Element => {
             <Flex justifyContent="space-between" alignItems="center" mb={6}>
                 <Heading size="md">Список тренувань</Heading>
 
-                <IconButton as={Link} aria-label="Додати нову вправу" to="/trainings/new" size="sm">
+                <IconButton as={Link} state={{ from: location }} aria-label="Додати нову вправу" to="/trainings/new" size="sm">
                     <HiOutlinePlusSm />
                 </IconButton>
             </Flex>
@@ -37,7 +38,13 @@ const Trainings = (): JSX.Element => {
                                 Видалити
                             </Button>
 
-                            <Button size="sm" rightIcon={<BiEdit />} as={Link} to={`/trainings/${item.id}`}>
+                            <Button
+                                size="sm"
+                                rightIcon={<BiEdit />}
+                                as={Link}
+                                state={{ from: location }}
+                                to={`/trainings/${item.id}`}
+                            >
                                 Редагувати
                             </Button>
                         </Flex>

@@ -20,7 +20,7 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { useForm } from 'react-hook-form';
 import { BiEdit } from 'react-icons/all';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { object, string } from 'yup';
 
 import { FloatingButton } from '../../../components/floating-button';
@@ -51,6 +51,7 @@ export const ExerciseForm = ({ onSubmit, defaultValues, buttonLabel }: Props): J
         formState: { errors },
     } = useForm<ExercisesBody>({ defaultValues, resolver: yupResolver(ExerciseSchema) });
 
+    const location = useLocation();
     const { data, refetch, isLoading } = useExercisesAllQuery();
 
     const title = watch('title') || '';
@@ -105,12 +106,25 @@ export const ExerciseForm = ({ onSubmit, defaultValues, buttonLabel }: Props): J
                 {item => (
                     <Tr>
                         <Td w="100%">
-                            <Text as={Link} to={`/exercises/${item.id}`} noOfLines={1} display="block" maxWidth="80vw">
+                            <Text
+                                as={Link}
+                                state={{ from: location }}
+                                to={`/exercises/${item.id}`}
+                                noOfLines={1}
+                                display="block"
+                                maxWidth="80vw"
+                            >
                                 {item.title}
                             </Text>
                         </Td>
                         <Td>
-                            <IconButton as={Link} aria-label="Редагувати вправу" to={`/exercises/${item.id}/edit`} size="sm">
+                            <IconButton
+                                as={Link}
+                                state={{ from: location }}
+                                aria-label="Редагувати вправу"
+                                to={`/exercises/${item.id}/edit`}
+                                size="sm"
+                            >
                                 <BiEdit />
                             </IconButton>
                         </Td>

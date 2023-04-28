@@ -11,8 +11,6 @@ export const useTrainingsAllQuery = (): UseQueryResult<TrainingsType[]> => {
     return useQuery<TrainingsType[]>({
         queryKey: ['trainings'],
         queryFn: trainingsFetcher.getAll,
-        retry: false,
-        refetchOnWindowFocus: false,
     });
 };
 
@@ -20,8 +18,6 @@ export const useTrainingQuery = (id: ID): UseQueryResult<TrainingsType> => {
     return useQuery<TrainingsType>({
         queryKey: ['trainings', id],
         queryFn: () => trainingsFetcher.get(id),
-        retry: false,
-        refetchOnWindowFocus: false,
         enabled: Boolean(id),
     });
 };
@@ -30,8 +26,6 @@ export const useTrainingExercisesQuery = (id: ID): UseQueryResult<ExercisesType[
     return useQuery<ExercisesType[]>({
         queryKey: ['trainings', 'exercises', id],
         queryFn: () => trainingsFetcher.getExercises(id),
-        retry: false,
-        refetchOnWindowFocus: false,
     });
 };
 

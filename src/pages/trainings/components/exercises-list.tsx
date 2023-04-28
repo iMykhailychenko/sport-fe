@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconButton, Text, Tr } from '@chakra-ui/react';
 import { BiEdit } from 'react-icons/all';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Table, Td } from '../../../components/table';
 import { ExercisesType } from '../../../query/exercises/exercises.type';
@@ -13,6 +13,7 @@ interface Props {
     id: ID;
 }
 export const ExercisesList = ({ id }: Props): JSX.Element => {
+    const location = useLocation();
     const { data, isLoading } = useTrainingExercisesQuery(id);
 
     return (
@@ -20,12 +21,25 @@ export const ExercisesList = ({ id }: Props): JSX.Element => {
             {item => (
                 <Tr>
                     <Td w="100%">
-                        <Text as={Link} to={`/exercises/${item.id}`} noOfLines={1} display="block" maxWidth="80vw">
+                        <Text
+                            as={Link}
+                            state={{ from: location }}
+                            to={`/exercises/${item.id}`}
+                            noOfLines={1}
+                            display="block"
+                            maxWidth="80vw"
+                        >
                             {item.title}
                         </Text>
                     </Td>
                     <Td>
-                        <IconButton as={Link} aria-label="Редагувати вправу" to={`/exercises/${item.id}/edit`} size="sm">
+                        <IconButton
+                            as={Link}
+                            state={{ from: location }}
+                            aria-label="Редагувати вправу"
+                            to={`/exercises/${item.id}/edit`}
+                            size="sm"
+                        >
                             <BiEdit />
                         </IconButton>
                     </Td>

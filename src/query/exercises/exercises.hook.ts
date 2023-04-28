@@ -10,8 +10,6 @@ export const useExercisesAllQuery = (): UseQueryResult<ExercisesType[]> => {
     return useQuery<ExercisesType[]>({
         queryKey: ['exercises'],
         queryFn: trainingFetcher.getAll,
-        refetchOnWindowFocus: false,
-        staleTime: 1_000,
     });
 };
 
@@ -19,10 +17,7 @@ export const useExerciseQuery = (id?: ID): UseQueryResult<ExercisesType> => {
     return useQuery<ExercisesType>({
         queryKey: ['exercises', id],
         queryFn: () => trainingFetcher.get(id),
-        refetchOnWindowFocus: false,
-        staleTime: 30_000,
         enabled: Boolean(id),
-        retry: false,
     });
 };
 

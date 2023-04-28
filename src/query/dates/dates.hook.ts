@@ -12,7 +12,6 @@ export const useDateQuery = (): UseQueryResult<DateType[]> => {
     return useQuery<DateType[]>({
         queryKey: ['dates', dateFormat],
         queryFn: () => dateFetcher.get(dateFormat),
-        retry: false,
     });
 };
 
@@ -26,4 +25,15 @@ export const useDatesCreateAllMutation = (): UseMutationResult<void, unknown, Da
 
 export const useDatesDeleteMutation = (): UseMutationResult<void, unknown, [ID, ID]> => {
     return useMutation({ mutationFn: dateFetcher.delete });
+};
+
+export const useDatesCalendarQuery = (): UseQueryResult<string[]> => {
+    const { month, year } = useDate();
+    const monthAndYear = `${month}-${year}`;
+
+    return useQuery<string[]>({
+        queryKey: ['dates', 'calendar', monthAndYear],
+        queryFn: () => dateFetcher.getCalendar(monthAndYear),
+        placeholderData: [],
+    });
 };

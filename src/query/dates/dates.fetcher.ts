@@ -19,6 +19,10 @@ class DateFetcher {
     delete = async ([date_id, exercise_id]: [ID, ID]): Promise<void> => {
         await privateApi.delete<void>(`/dates/${date_id}/${exercise_id}`);
     };
+
+    getCalendar = (date: string): Promise<string[]> => {
+        return privateApi.get<string[]>(`/dates/calendar/${date}`).then(response => response.data);
+    };
 }
 
 export const dateFetcher = new DateFetcher();

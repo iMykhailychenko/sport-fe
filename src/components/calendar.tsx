@@ -4,12 +4,14 @@ import { Button, Grid, Text, Select } from '@chakra-ui/react';
 import { range } from 'lodash-es';
 
 import { useDate } from '../context/date.context';
+import { useDatesCalendarQuery } from '../query/dates/dates.hook';
 import { allYears, monthList, weekList } from '../utils/calendar';
 
 import { DateNavigation } from './date-navigation';
 
 export const Calendar = (): JSX.Element => {
     const { day, month, year, setDay, setMonth, setYear, totalDays } = useDate();
+    const { data = [] } = useDatesCalendarQuery();
 
     const onChangeYear = useCallback((event: ChangeEvent<HTMLSelectElement>) => setYear(Number(event.target.value)), []);
     const onChangeMonth = useCallback((event: ChangeEvent<HTMLSelectElement>) => setMonth(Number(event.target.value)), []);
@@ -48,11 +50,20 @@ export const Calendar = (): JSX.Element => {
                     <span key={d + 'prev'} />
                 ))}
 
-                {currentMonthArray.map(d => (
-                    <Button key={d} colorScheme={day === d ? 'blue' : 'gray'} onClick={() => setDay(d)}>
-                        {d}
-                    </Button>
-                ))}
+                {currentMonthArray.map(d => {
+                    const isTrainingDay = data.includes(`${d}-${month}-${year}`);
+                    return (
+                        <Button
+                            key={d}
+                            onClick={() => setDay(d)}
+                            color={isTrainingDay ? 'blue.500' : undefined}
+                            colorScheme={day === d ? 'blue' : 'gray'}
+                            variant={isTrainingDay ? 'outline' : 'solid'}
+                        >
+                            {d}
+                        </Button>
+                    );
+                })}
             </Grid>
         </>
     );

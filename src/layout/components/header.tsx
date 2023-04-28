@@ -10,7 +10,7 @@ import { monthList } from '../../utils/calendar';
 export const Header = (): JSX.Element => {
     const { day, month, year, onReset } = useDate();
 
-    const { pathname } = useLocation();
+    const { pathname, state } = useLocation();
     const isHome = pathname === '/' || pathname === '';
 
     const { colorMode, setColorMode } = useColorMode();
@@ -21,9 +21,11 @@ export const Header = (): JSX.Element => {
     const monthWithZero = String(month + 1).padStart(2, '0');
 
     const backLink = useMemo(() => {
+        if (state?.from) return state.from;
+
         const arr = pathname.split('/');
         return arr.slice(0, arr.length - 1).join('/') ?? '/';
-    }, [pathname]);
+    }, [pathname, state?.from]);
 
     return (
         <Flex justifyContent="space-between" alignItems="center" pb={5}>

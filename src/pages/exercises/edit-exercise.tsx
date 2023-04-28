@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { Button, Heading } from '@chakra-ui/react';
 import { RiDeleteBinLine } from 'react-icons/all';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import { ListLoader } from '../../components/list-loader';
 import { useExercisesDeleteMutation, useExerciseQuery, useExercisesUpdateMutation } from '../../query/exercises/exercises.hook';
@@ -11,6 +11,7 @@ import { ExercisesBody, ExercisesType } from '../../query/exercises/exercises.ty
 import { ExerciseForm } from './components/exercise-form';
 
 const EditExercise = (): JSX.Element => {
+    const location = useLocation();
     const navigate = useNavigate();
     const params = useParams();
     const exerciseId = Number(params.exerciseId);
@@ -18,7 +19,7 @@ const EditExercise = (): JSX.Element => {
 
     useEffect(() => {
         if (isError) {
-            navigate('/exercises');
+            navigate('/exercises', { state: { from: location } });
         }
     }, [isError]);
 
@@ -28,7 +29,7 @@ const EditExercise = (): JSX.Element => {
     const onSubmit = async (data: ExercisesBody): Promise<void> => {
         try {
             await updateExercisesMutation({ ...data, id: exerciseId } as ExercisesType);
-            await navigate('/exercises');
+            await navigate('/exercises', { state: { from: location } });
         } catch (err) {
             console.log(err);
         }
@@ -37,7 +38,7 @@ const EditExercise = (): JSX.Element => {
     const onDelete = (): void => {
         deleteExercisesMutation(exerciseId, {
             onSuccess: () => {
-                navigate('/exercises');
+                navigate('/exercises', { state: { from: location } });
             },
         });
     };

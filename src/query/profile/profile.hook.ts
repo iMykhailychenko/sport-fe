@@ -12,8 +12,6 @@ export const useProfileQuery = (): UseQueryResult<ProfileType> => {
         queryKey: ['profile'],
         queryFn: profileFetcher.get,
         onError: removeToken,
-        retry: false,
-        staleTime: 5_000,
         enabled: isTokenPresent,
     });
 

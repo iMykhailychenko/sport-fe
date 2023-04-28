@@ -3,7 +3,7 @@ import React, { memo, useCallback } from 'react';
 import { Box, Flex, IconButton, Text, Tr } from '@chakra-ui/react';
 import { isEqual } from 'lodash-es';
 import { FcApproval, HiOutlineMinusSm, HiOutlinePlusSm } from 'react-icons/all';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useDate } from '../../../../context/date.context';
 import { useDateQuery, useDatesCreateMutation, useDatesDeleteMutation } from '../../../../query/dates/dates.hook';
@@ -14,6 +14,7 @@ interface Props {
     item: ExercisesType;
 }
 export const AddExerciseTable = memo(({ item }: Props): JSX.Element => {
+    const location = useLocation();
     const { dateFormat } = useDate();
     const { data: selectedExercises, refetch } = useDateQuery();
 
@@ -48,7 +49,14 @@ export const AddExerciseTable = memo(({ item }: Props): JSX.Element => {
                             <FcApproval />
                         </Box>
                     )}
-                    <Text as={Link} to={`/exercises/${item.id}`} noOfLines={1} display="block" maxWidth="73vw">
+                    <Text
+                        as={Link}
+                        state={{ from: location }}
+                        to={`/exercises/${item.id}`}
+                        noOfLines={1}
+                        display="block"
+                        maxWidth="73vw"
+                    >
                         {item.title}
                     </Text>
                 </Flex>

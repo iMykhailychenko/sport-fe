@@ -1,6 +1,6 @@
 import { Heading, IconButton, Tr, Skeleton } from '@chakra-ui/react';
 import { RiCalendarEventLine } from 'react-icons/all';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import { Table, Td } from '../../components/table';
 import { useDate } from '../../context/date.context';
@@ -13,6 +13,7 @@ const header = ['Повтор', 'Вага', 'Час', ''];
 
 const ExercisesItem = (): JSX.Element => {
     const navigate = useNavigate();
+    const location = useLocation();
     const params = useParams();
     const exerciseId = params.exerciseId as ID;
 
@@ -35,7 +36,7 @@ const ExercisesItem = (): JSX.Element => {
 
     const openCalendar = (date: string): void => {
         setDateFromString(date);
-        navigate('/calendar');
+        navigate('/calendar', { state: { from: location } });
     };
 
     return (

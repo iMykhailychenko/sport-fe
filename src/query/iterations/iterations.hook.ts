@@ -9,8 +9,6 @@ export const useIterationsQuery = (date_id: ID, exercise_id: ID): UseQueryResult
     return useQuery<Iteration[]>({
         queryKey: ['iterations', date_id, exercise_id],
         queryFn: () => iterationsFetcher.get(date_id, exercise_id),
-        retry: false,
-        refetchOnWindowFocus: false,
     });
 };
 
@@ -18,8 +16,6 @@ export const useIterationsExerciseQuery = (exercise_id: ID): UseQueryResult<Exer
     return useQuery<ExerciseIterations[]>({
         queryKey: ['iterations', exercise_id],
         queryFn: () => iterationsFetcher.getExercise(exercise_id),
-        retry: false,
-        refetchOnWindowFocus: false,
     });
 };
 
