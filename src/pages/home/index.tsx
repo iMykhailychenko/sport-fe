@@ -6,12 +6,12 @@ import { MenuItem } from './components/menu-item';
 const Home = (): JSX.Element => {
     return (
         <Stack spacing={3}>
-            <MenuItem to="/trainings/today" label="Почати тренування">
-                <FcLike />
-            </MenuItem>
-
             <MenuItem to="/calendar" label="Календар">
                 <FcPlanner />
+            </MenuItem>
+
+            <MenuItem to="/trainings/today" label="Почати тренування">
+                <FcLike />
             </MenuItem>
 
             <MenuItem to="/trainings" label="Список тренувань">

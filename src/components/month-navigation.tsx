@@ -9,9 +9,10 @@ interface Props {
     children: ReactNode;
 }
 export const MonthNavigation = ({ children }: Props): JSX.Element => {
-    const { setMonth } = useDate();
+    const { setMonth, setDay } = useDate();
 
     const onPrev = useCallback((): void => {
+        setDay(1);
         setMonth(prev => {
             if (prev <= 1) {
                 return 12;
@@ -22,6 +23,7 @@ export const MonthNavigation = ({ children }: Props): JSX.Element => {
     }, []);
 
     const onNext = useCallback((): void => {
+        setDay(1);
         setMonth(prev => {
             if (prev > 12) {
                 return 1;

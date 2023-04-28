@@ -1,5 +1,5 @@
 import { HStack, Button } from '@chakra-ui/react';
-import { FiInfo, RiDeleteBinLine } from 'react-icons/all';
+import { AiOutlineBarChart, RiDeleteBinLine } from 'react-icons/all';
 import { Link, useLocation } from 'react-router-dom';
 
 import { useDateQuery, useDatesDeleteMutation } from '../../query/dates/dates.hook';
@@ -32,7 +32,7 @@ export const IterationsList = (): JSX.Element => {
                         <Button
                             size="sm"
                             as={Link}
-                            leftIcon={<FiInfo />}
+                            leftIcon={<AiOutlineBarChart />}
                             state={{ from: location }}
                             to={`/exercises/${item.exercise_id}`}
                         >

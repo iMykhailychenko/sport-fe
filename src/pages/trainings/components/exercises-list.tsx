@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { IconButton, Text, Tr } from '@chakra-ui/react';
-import { BiEdit } from 'react-icons/all';
+import { BiEdit, AiOutlineBarChart } from 'react-icons/all';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Table, Td } from '../../../components/table';
@@ -17,7 +17,7 @@ export const ExercisesList = ({ id }: Props): JSX.Element => {
     const { data, isLoading } = useTrainingExercisesQuery(id);
 
     return (
-        <Table<ExercisesType> data={data ?? []} isLoading={isLoading} loadingItems={1}>
+        <Table<ExercisesType> data={data ?? []} isLoading={isLoading} loadingItems={4}>
             {item => (
                 <Tr>
                     <Td w="100%">
@@ -31,6 +31,17 @@ export const ExercisesList = ({ id }: Props): JSX.Element => {
                         >
                             {item.title}
                         </Text>
+                    </Td>
+                    <Td>
+                        <IconButton
+                            as={Link}
+                            state={{ from: location }}
+                            aria-label="Деталі вправи"
+                            to={`/exercises/${item.id}`}
+                            size="sm"
+                        >
+                            <AiOutlineBarChart />
+                        </IconButton>
                     </Td>
                     <Td>
                         <IconButton

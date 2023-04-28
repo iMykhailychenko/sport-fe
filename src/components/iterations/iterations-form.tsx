@@ -18,7 +18,7 @@ interface Props {
 
 export const IterationsForm = ({ date_id, exercise_id }: Props): JSX.Element => {
     const queryClient = useQueryClient();
-    const { mutate } = useIterationsCreateMutation();
+    const { mutate, isLoading } = useIterationsCreateMutation();
     const { register, handleSubmit } = useForm<IterationForm>();
 
     const onSubmit = ({ time, repeat, weight }: IterationForm): void => {
@@ -42,7 +42,7 @@ export const IterationsForm = ({ date_id, exercise_id }: Props): JSX.Element => 
                 <Input size="sm" placeholder="30 хв" type="number" {...register('time', { valueAsNumber: true })} />
             </Td>
             <Td py={6}>
-                <IconButton size="sm" aria-label="Опції" onClick={handleSubmit(onSubmit)}>
+                <IconButton size="sm" aria-label="Опції" onClick={handleSubmit(onSubmit)} isLoading={isLoading}>
                     <HiOutlinePlusSm />
                 </IconButton>
             </Td>

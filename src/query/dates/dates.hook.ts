@@ -35,5 +35,6 @@ export const useDatesCalendarQuery = (): UseQueryResult<string[]> => {
         queryKey: ['dates', 'calendar', monthAndYear],
         queryFn: () => dateFetcher.getCalendar(monthAndYear),
         placeholderData: [],
+        staleTime: 5_000,
     });
 };

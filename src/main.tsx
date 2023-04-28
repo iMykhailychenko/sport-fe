@@ -12,7 +12,7 @@ import theme from './utils/theme';
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            staleTime: 300_000, // 5 min
+            staleTime: 5_000,
             refetchOnWindowFocus: false,
             retry: false,
         },

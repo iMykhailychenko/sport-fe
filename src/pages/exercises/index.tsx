@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Heading, Flex, IconButton, Text, InputLeftElement, Input, InputGroup, Tr } from '@chakra-ui/react';
-import { HiOutlinePlusSm, BiEdit, RiSearchLine } from 'react-icons/all';
+import { HiOutlinePlusSm, BiEdit, RiSearchLine, AiOutlineBarChart } from 'react-icons/all';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Table, Td } from '../../components/table';
@@ -45,6 +45,17 @@ const Exercises = (): JSX.Element => {
                             >
                                 {item.title}
                             </Text>
+                        </Td>
+                        <Td>
+                            <IconButton
+                                as={Link}
+                                state={{ from: location }}
+                                aria-label="Деталі вправи"
+                                to={`/exercises/${item.id}`}
+                                size="sm"
+                            >
+                                <AiOutlineBarChart />
+                            </IconButton>
                         </Td>
                         <Td>
                             <IconButton
