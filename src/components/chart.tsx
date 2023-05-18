@@ -5,8 +5,6 @@ import { sum } from 'lodash-es';
 
 import { ExerciseIterations } from '../query/iterations/iterations.type';
 
-// ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
 const options = {
     responsive: true,
     plugins: {
@@ -31,7 +29,6 @@ const Chart = ({ name, data }: Props): JSX.Element => {
         let chart: ChartJS;
         if (ref.current) {
             const labels = Object.keys(data).reverse();
-            console.log(labels.map(label => sum(data[label].map(item => item.weight))));
 
             chart = new ChartJS(ref.current, {
                 options,
@@ -41,9 +38,14 @@ const Chart = ({ name, data }: Props): JSX.Element => {
                     datasets: [
                         {
                             label: name,
-                            data: labels.map(label =>
-                                sum(data[label].map(item => (item.weight || 1) * (item.repeat || 1) * (item.time || 1))),
-                            ),
+                            data: labels.map(label => {
+                                return sum(
+                                    data[label].map(({ weight, repeat, time }) => {
+                                        const w = weight || 1;
+                                        return (w > 0 ? w : 90 + w) * (repeat || 1) * (time || 1);
+                                    }),
+                                );
+                            }),
                             borderColor: 'rgb(255, 99, 132)',
                             backgroundColor: 'rgba(255, 99, 132, 0.5)',
                         },
