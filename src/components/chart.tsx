@@ -42,7 +42,7 @@ const Chart = ({ name, data }: Props): JSX.Element => {
                                 return sum(
                                     data[label].map(({ weight, repeat, time }) => {
                                         const w = weight || 1;
-                                        return (w > 0 ? w : 90 + w) * (repeat || 1) * (time || 1);
+                                        return w * (repeat || 1) * (time || 1);
                                     }),
                                 );
                             }),
